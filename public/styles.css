@@ -1,0 +1,137 @@
+body
+{
+	width: 800px;
+	height: 480px;
+	border: solid;
+}
+#top
+{
+	width: 800px;
+	height:380px;
+}
+#left 
+{
+    background-color: #86c0f0;
+    width: 200px;
+    height: 380px;
+    float: left;
+}
+#right 
+{
+	background-color: #e1e0e0; */
+    background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(125,185,232,0) 100%);
+    background: -webkit-linear-gradient(top, rgb(84, 132, 188) 0%,rgba(125,185,232,0) 100%);
+    background: linear-gradient(to bottom, rgba(59, 130, 212, 0.78) 0%,rgba(125,185,232,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=0 );
+    height: 380px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+}
+
+#right > div {
+	background-color: #f1f1f1;
+	width: 177px;
+	margin: 10px;
+	text-align: center;
+	height: 73px;
+	line-height: 72px;
+	border-radius: 10px;
+	border: solid;
+	border-width: 1px;
+
+}
+
+#bottom 
+{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b8e1fc+0,a9d2f3+10,90bae4+25,90bcea+37,90bff0+50,6ba8e5+51,a2daf5+83,bdf3fd+100;Blue+Gloss+%231 */
+background: rgb(184,225,252); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(184,225,252,1) 0%, rgba(169,210,243,1) 10%, rgba(144,186,228,1) 25%, rgba(144,188,234,1) 37%, rgba(144,191,240,1) 50%, rgba(107,168,229,1) 51%, rgba(162,218,245,1) 83%, rgba(189,243,253,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(184,225,252,1) 0%,rgba(169,210,243,1) 10%,rgba(144,186,228,1) 25%,rgba(144,188,234,1) 37%,rgba(144,191,240,1) 50%,rgba(107,168,229,1) 51%,rgba(162,218,245,1) 83%,rgba(189,243,253,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(184,225,252,1) 0%,rgba(169,210,243,1) 10%,rgba(144,186,228,1) 25%,rgba(144,188,234,1) 37%,rgba(144,191,240,1) 50%,rgba(107,168,229,1) 51%,rgba(162,218,245,1) 83%,rgba(189,243,253,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */	height: 100px;
+}
+.optionButton
+{
+	display: block;
+	width: 180px;
+	margin-left:auto;
+    margin-right:auto;
+    height: 50px;
+    margin-top: 33px;
+    border-radius: 10px;
+
+}
+.dispenseButton
+{
+	width: 140px;
+    margin-left: 13px;
+    height: 60px;
+    margin-top: 16px;
+    border-radius: 10px;
+
+}
+.popupContainer
+{
+    position: absolute;
+    z-index: 50;
+    top: 17px;
+    left: 22px;
+}
+.popupTop
+{
+	background-color: #cbdff5;
+	border-radius: 10px;
+	width: 757px;
+	height: 391px;
+	padding: 5px;
+}
+.popupBottom
+{
+	background: rgb(184,225,252); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(184,225,252,1) 0%, rgba(169,210,243,1) 10%, rgba(144,186,228,1) 25%, rgba(144,188,234,1) 37%, rgba(144,191,240,1) 50%, rgba(107,168,229,1) 51%, rgba(162,218,245,1) 83%, rgba(189,243,253,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(184,225,252,1) 0%,rgba(169,210,243,1) 10%,rgba(144,186,228,1) 25%,rgba(144,188,234,1) 37%,rgba(144,191,240,1) 50%,rgba(107,168,229,1) 51%,rgba(162,218,245,1) 83%,rgba(189,243,253,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(184,225,252,1) 0%,rgba(169,210,243,1) 10%,rgba(144,186,228,1) 25%,rgba(144,188,234,1) 37%,rgba(144,191,240,1) 50%,rgba(107,168,229,1) 51%,rgba(162,218,245,1) 83%,rgba(189,243,253,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */	height: 100px;
+	border-radius: 10px;
+	height: 54px;
+}
+
+#drinkAdditionContainer
+{
+	display: none;
+	padding: 10px;
+}
+.ingredientItem select
+{
+	height: 40px;
+    width: 400px;
+    margin-right: 156px;
+	
+}
+.ingredientItem .minus
+{
+	margin-right: 20px;
+    background: #659ce0;
+    padding: 5px 10px;
+}
+.ingredientItem .plus
+{
+	margin-right: 20px;
+    background: #669ddf;
+    padding: 5px 10px;
+}
+.ingredientItem .quantity
+{
+	margin-right: 20px;
+    background-color: #c6c6c6;
+    padding: 5px 15px;
+	
+}
+#addIngredientButton
+{
+	margin-top: 12px;
+    padding: 5px;
+    width: 720px;
+    background-color: #649be1;
+}

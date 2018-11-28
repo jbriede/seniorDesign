@@ -2,7 +2,21 @@ class electronicsManager {
   constructor() {
     
   }
+  makeDrink(instructions)
+  {
+
+  }
+
+  dispence(oz)
+  {
+
+  }
+
+  getLevel()
+  {
+
+  }
 
 }
 
-module.exports.GUIBackend = GUIBackend;  
+module.exports.electronicsManager = electronicsManager;  
