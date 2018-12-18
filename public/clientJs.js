@@ -21,8 +21,6 @@ function addDrinkProcedure()
 {
 	drinkAdditionContainer.style.display = "block";
 	var ingredients = [];
-	var drink = {};
-	drink.name = "Trial Drink";
 
 	function rebuildIngredeints()
 	{
@@ -107,11 +105,14 @@ function addDrinkProcedure()
 	{
 		ingredientContainer.innerHTML = "";
 		drinkAdditionContainer.style.display = "none";
+		document.getElementById("drinkNameText").value = "";
 	}
 
 	var completeButton = document.getElementById("drinkAdditionCompleteButton");
 	completeButton.onclick = function()
 	{
+		var drink = {};
+		drink.name = document.getElementById("drinkNameText").value;
 		drink.ingredients = ingredients;
 		socket.emit("newDrink", drink);
 		exitButton.click();
