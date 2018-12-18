@@ -4,12 +4,6 @@ Main page, shows current drink, Menu option
 Menu page: Add drink, change tank, clean tanks, remove drink
 add drink page
 clean page
-
-
-
-
-
-
 -->
 
 
@@ -33,6 +27,9 @@ clean page
       </button>
       <button class="optionButton" id="cleanButton">
         Clean Container
+      </button>
+      <button class="optionButton" id="cleanButton">
+        Set Temp (69)
       </button>
     </div>
     <div id="right">
@@ -60,22 +57,19 @@ clean page
 
   <div id="drinkAdditionContainer" class="popupContainer">
     <div class=popupTop>
-      <div id="ingredientContainer">
-        <div class="ingredientItem" id="ingredientItem-1">
-          <select>
-          <option value="Rum">Rum</option>
-          </select>
-          <span class="minus">-</span>
-          <span class="quantity">0.0 oz</span>
-          <span class="plus">+</span>
-        </div>
+      <div class="ingredientButtonWrapper">
+        <div id="ingredientContainer"></div>
+        <div id="addIngredientButton">Add Ingredient </div> 
       </div>
-      <div id="addIngredientButton">
-        Add Ingredient
+      <div class=nameDiv>
+        <form id="drinkNameForm">
+          Name: <input type="text" name="drinkName"><br>
+        </form>
       </div>
-     
     </div>
     <div class="popupBottom">
+      <button id="drinkAdditionCompleteButton" class="PopupBottomButtons">Complete</button>
+      <button id="drinkAdditionExitButton" class="PopupBottomButtons" style="background-color: #f6422e">Exit</button>
     </div>
   </div>
 </body>

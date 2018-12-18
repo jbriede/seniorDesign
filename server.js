@@ -30,7 +30,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('newDrink', function(drinkObject)
 	{
-
+		console.log(drinkObject);
 	});
 	socket.on('removeDrink', function(drinkId)
 	{

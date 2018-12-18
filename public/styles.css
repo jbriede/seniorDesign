@@ -57,8 +57,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 	width: 180px;
 	margin-left:auto;
     margin-right:auto;
-    height: 50px;
-    margin-top: 33px;
+    height: 58px;
+    margin-top: 10px;
+    margin-bottom: 16px;
     border-radius: 10px;
 
 }
@@ -102,24 +103,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 	display: none;
 	padding: 10px;
 }
+.ingredientItem
+{
+	margin-top: 3px;
+}
 .ingredientItem select
 {
 	height: 40px;
     width: 400px;
-    margin-right: 156px;
+    margin-right: 40px;
 	
 }
 .ingredientItem .minus
 {
 	margin-right: 20px;
     background: #659ce0;
-    padding: 5px 10px;
+    padding: 6px 13px;
+    border-radius: 18px;
 }
 .ingredientItem .plus
 {
-	margin-right: 20px;
+	margin-right: 30px;
     background: #669ddf;
-    padding: 5px 10px;
+    padding: 6px 13px;
+   border-radius: 18px;
 }
 .ingredientItem .quantity
 {
@@ -128,10 +135,41 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
     padding: 5px 15px;
 	
 }
+.ingredientItem .delete
+{
+	margin-right: 20px;
+    background-color: #f34437;
+    padding: 5px 27px;
+	
+}
 #addIngredientButton
 {
 	margin-top: 12px;
     padding: 5px;
     width: 720px;
     background-color: #649be1;
+}
+
+.PopupBottomButtons
+{
+	width: 140px;
+    margin-right: 5px;
+    height: 49px;
+    margin-top: 3px;
+    border-radius: 10px;
+    float: right;
+}
+.ingredientButtonWrapper
+{
+	height: 349px;
+}
+#drinkNameForm
+{
+    text-align: center;
+}
+
+#drinkNameForm input
+{
+	width: 200px;
+    height: 30px;
 }
