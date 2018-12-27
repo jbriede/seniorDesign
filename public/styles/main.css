@@ -103,6 +103,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 	display: none;
 	padding: 10px;
 }
+#drinkDeleteContainer
+{
+	display: none;
+	padding: 10px;
+}
 .ingredientItem
 {
 	margin-top: 3px;
@@ -173,3 +178,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 	width: 200px;
     height: 30px;
 }
+.drinkDeleteText
+{
+	font-size: 29px;
+    padding: 5px;
+    border-bottom: solid;
+}
+.deleteItem
+{
+	margin: 10px 5px;
+    background-color: #99c3ec;
+    padding: 5px;
+}
+
+
+
+

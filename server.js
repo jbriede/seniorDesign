@@ -23,17 +23,35 @@ app.get('/', function(req, res){
 
 let on = false;
 
-io.on('connection', function(socket){
-	socket.on('getDrinks', function()
-	{
+drinkComboObjects = [];
+var cur_num_combinations = 0;
 
-	});
-	socket.on('newDrink', function(drinkObject)
+io.on('connection', function(socket){
+	socket.on('getCombinations', function()
 	{
-		console.log(drinkObject);
+		socket.emit("combinations", drinkComboObjects);
 	});
-	socket.on('removeDrink', function(drinkId)
+	socket.on('newCombination', function(combinationObject)
 	{
+		console.log("adding : " + combinationObject);
+		combinationObject.id = cur_num_combinations;
+		drinkComboObjects.push(combinationObject);
+		cur_num_combinations += 1;
+	});
+	socket.on('deleteCombination', function(drinkId)
+	{
+		console.log("deleting : " + drinkId);
+		var drinkComboObjects2 = [];
+		var count = 0;
+		for (var index = 0; index < drinkComboObjects.length; index++)
+		{
+			if (drinkComboObjects[index].id != drinkId)
+			{
+				drinkComboObjects2[count] = drinkComboObjects[index];
+				count+=1;	
+			}
+		}
+		drinkComboObjects = drinkComboObjects2;
 
 	});
 	socket.on('refillContainer', function(refilObject)
