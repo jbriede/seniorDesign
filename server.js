@@ -11,8 +11,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 //var Database = require('database.js');
 
-// var gpio = require('rpi-gpio');
-// var gpiop = gpio.promise;
+ var gpio = require('rpi-gpio');
+ var gpiop = gpio.promise;
 
 app.use(express.static('public'))
 
@@ -70,6 +70,14 @@ io.on('connection', function(socket){
 
 	});
 	socket.on('dispenseCombination', function(drinkId){
+		
+		gpiop.setup(18, gpio.DIR_OUT).then(() =>
+		{
+			return gpio.write(18, false)
+			
+			}).catch((err) => {
+				console.log(err)
+		}) 
 		console.log("Dispensing: ", drinkId);
 	});
 
