@@ -111,6 +111,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 
 #dispensePopup
 {
+
+}
+
+.popupType2
+{
 	display: none;
     padding: 10px;
     position: absolute;

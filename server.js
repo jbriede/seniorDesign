@@ -64,7 +64,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('getTemperature', function()
 	{
-
+		console.log("asking for temp");
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
 

@@ -44,6 +44,18 @@ deleteDrinkButton.onclick = function()
 	  console.log(err); // Error: "It broke"
 	});
 }
+
+var setTemperatureButton = document.getElementById("setTemperature");
+console.log(setTemperatureButton);
+setTemperatureButton.onclick = function()
+{
+	socket.emit("getTemperature");
+	socket.on("tempReturn", function(newTemp)
+	{
+		console.log("Server says temp is :", newTemp);
+	});
+}
+
 // fillContainer.onclick = function()
 // {
 
