@@ -2,8 +2,8 @@ const fs = require('fs');
 class database {
   constructor(path) 
   {
-  	this.tanks = {};
-  	// this.drinks = [];
+  	this.tanks = [];
+  	this.drinks = [];
   	// this.drinks.push({"name": "beer", "ingredients": [{"tankId": "2", "oz": 5}]})
   	// this.drinks.push({"name": "blah", "ingredients": [{"tankId": "1", "oz": 2}]})
 
@@ -28,25 +28,12 @@ class database {
   {
   	return this.drinks;
   }
-  replaceTank(tankNum, drinkName)
-  {
-  	//Need to delete all drinks that use that tank
-  }
   updateFile()
   {
   	let data = JSON.stringify(this.drinks);  
-	fs.writeFileSync('drinks.json', data);
-	data = JSON.stringify(this.tanks);
-	fs.writeFileSync('tanks.json', data);
-  }
-  createDrinkJSON(name, ingredients)
-  {
-  	let drink  = {"name": name, "ingredients": ingredients};
-  	return drink;
-  }
-  createIngredientArray(tankId, oz, array)
-  {
-  	array.push({"tankId": tankId, "oz", oz});
+  	fs.writeFileSync('drinks.json', data);
+  	data = JSON.stringify(this.tanks);
+  	fs.writeFileSync('tanks.json', data);
   }
 
 }

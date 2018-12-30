@@ -66,8 +66,11 @@ io.on('connection', function(socket){
 	{
 
 	});
-	socket.on('dispenseLiquid', function(tankId){
+	socket.on('dispenseSingleDrink', function(tankId){
 
+	});
+	socket.on('dispenseCombination', function(drinkId){
+		console.log("Dispensing: ", drinkId);
 	});
 
 
