@@ -1,5 +1,6 @@
 var combinationsContainer = document.getElementById("right");
 
+/* Ask server for list of drink combos */
 var getCombinations = function(socket)
 {
 	return new Promise(function(resolve, reject) 
@@ -13,6 +14,7 @@ var getCombinations = function(socket)
 	});
 }
 
+/* Client copy of drink list */
 var combinationsG = [];
 
 var dispensePopup = document.getElementById("dispensePopup");
@@ -21,19 +23,21 @@ var dispenseButton = document.getElementById("dispenseButton");
 var dispenseExitButton = document.getElementById("dispenseExitButton");
 var dispenseTitle = document.getElementById("dispenseTitle");
 
-
-
+/* This is called when the app starts and everytime something changes */
 var loadCombinationsProcedure = function(socket)
 {
 	combinationsContainer.innerHTML = "";
+
+	/* Get drinks from server */
 	getCombinations(socket).then(function(combinations) 
 	{
 		combinationsG = combinations;
-		
+		/* Build the HTML */
 		for (var i = 0; i < combinations.length; i++)
 		{
 			combinationsContainer.innerHTML += "<div id =\"combination-" + combinations[i].id + "\">" + combinations[i].name  + "</div>";
 		}
+		/* Set up the on click listeners */
 		for (var i = 0; i < combinations.length; i++)
 		{
 			document.getElementById("combination-" + combinations[i].id).onclick = function()
@@ -42,19 +46,23 @@ var loadCombinationsProcedure = function(socket)
 				dispensePopup.style.display = "block";
 				dispenseIngredients.innerHTML = "";
 				var drink = {};
+				/* So the drink ids dont line up with their array indices */
 				for (var i = 0; i < combinationsG.length; i+=1)
 				{
 					if (combinationsG[i].id == id)
 					{
 						drink = combinationsG[i];
+						break;
 					}
 				}
+				/* input name */
 				dispenseTitle.innerHTML = drink.name;
-
+				/* input ingredients */
 				for (var ingredientIndex = 0; ingredientIndex < drink.ingredients.length; ingredientIndex+=1)
 				{
 					dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].oz + "oz of "+ tankArray[drink.ingredients[ingredientIndex].tankId].name + "</div>"
 				}
+				/* Set up buttons */
 				dispenseButton.onclick = function()
 				{
 					socket.emit("dispenseCombination", id);
