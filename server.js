@@ -10,6 +10,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 //var Database = require('database.js');
+var sensor = require('node-dht-sensor');
 
  var gpio = require('rpi-gpio');
  var gpiop = gpio.promise;
@@ -23,7 +24,19 @@ app.get('/', function(req, res){
 
 let on = false;
 
-drinkComboObjects = [];
+var drinkComboObjects = [];
+
+
+
+var tank0 = {"name": "coke", "pin": 12};
+var tank1 = {"name": "coke1", "pin": 16};
+var tank2 = {"name": "coke2", "pin": 18};
+var tank3 = {"name": "coke3", "pin": 22};
+var tank4 = {"name": "coke4", "pin": 32};
+
+var tankArray = [tank0, tank1, tank2, tank3, tank4];
+
+
 var cur_num_combinations = 0;
 
 io.on('connection', function(socket){
@@ -64,9 +77,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('getTemperature', function()
 	{
-		var sensor = require('node-dht-sensor');
-
-		sensor.read(22, 4, function(err, temperature, humidity) {
+		sensor.read(11 , 26, function(err, temperature, humidity) {
 		    if (!err) {
 		        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
 		            'humidity: ' + humidity.toFixed(1) + '%'
@@ -78,15 +89,42 @@ io.on('connection', function(socket){
 
 	});
 	socket.on('dispenseCombination', function(drinkId){
-		
-		gpiop.setup(18, gpio.DIR_OUT).then(() =>
-		{
-			return gpio.write(18, false)
-			
-			}).catch((err) => {
-				console.log(err)
-		}) 
+		                 
+                
 		console.log("Dispensing: ", drinkId);
+		//console.log(drinkComboObjects);
+
+		for (var index = 0; index < drinkComboObjects.length; index++)
+		{
+			if (drinkComboObjects[index].id == drinkId)
+			{
+				var drink = drinkComboObjects[index];
+
+
+				for (var i = 0; i < drink.ingredients.length; i++)
+				{
+					var ingredient = drink.ingredients[i];
+					var tankId = ingredient.tankId;
+					var amount = ingredient.oz;
+					var pin = tankArray[tankId].pin;
+					console.log(pin);
+
+					turnon(pin);
+
+					setTimeout(function()
+					{
+						turnoff(pin);
+					}
+					, amount*1000);
+
+
+					
+				}
+				break;
+			}
+		}
+
+
 	});
 
 
@@ -124,17 +162,28 @@ http.listen(3000, function(){
 // console.log('here')
 
 
-// function turnoff()
-// {
-// 	gpiop.setup(18, gpio.DIR_OUT).then(() =>
-// 	{
-// 		return gpio.write(18, false)
-// 	}).catch((err) => {
-// 		console.log(err)
-// 	})
-// }
+function turnoff(pin)
+{
+	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	{
+		return gpio.write(pin, false)
+	}).catch((err) => {
+		console.log(err)
+	})
+}
 
-// setTimeout(turnoff, 3000);
+function turnon(pin)
+{
+	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	{
+		return gpio.write(pin, true)
+	}).catch((err) => {
+		console.log(err)
+	})
+}
+    
+
+
 
 // var GUI = require('./GUIBackend');
 //var DB = require('./database');
