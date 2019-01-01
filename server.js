@@ -64,7 +64,15 @@ io.on('connection', function(socket){
 	});
 	socket.on('getTemperature', function()
 	{
-		console.log("asking for temp");
+		var sensor = require('node-dht-sensor');
+
+		sensor.read(22, 4, function(err, temperature, humidity) {
+		    if (!err) {
+		        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+		            'humidity: ' + humidity.toFixed(1) + '%'
+		        );
+		    }
+		});
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
 
