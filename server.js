@@ -111,13 +111,7 @@ io.on('connection', function(socket){
 
 					turnon(pin);
 
-					setTimeout(function()
-					{
-						turnoff(pin);
-					}
-					, amount*1000);
-
-
+					setTimeout(turnoff.bind({pin: pin}), amount*1000); //modified to use bind. Bind ties each call to current paramaters
 					
 				}
 				break;
@@ -159,15 +153,14 @@ http.listen(3000, function(){
 
 
 
-// console.log('here')
-
-
-function turnoff(pin)
+function turnoff()
 {
-	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
 	{
-		return gpio.write(pin, false)
+		console.log("off", this.pin);
+		return gpio.write(this.pin, false)
 	}).catch((err) => {
+		console.log("CANT USE PIN", this.pin)
 		console.log(err)
 	})
 }
