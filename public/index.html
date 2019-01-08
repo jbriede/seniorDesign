@@ -29,7 +29,7 @@ clean page
         Clean Container
       </button>
       <button class="optionButton" id="setTemperature">
-        Set Temp (69)
+        Set Temp <span id="currTempButton"></span>      
       </button>
     </div>
     <div id="right">
@@ -98,17 +98,23 @@ clean page
       </div>
   </div>
 
-  <div class="popupType2">
-<!--     <div id="dispenseTitle">
+  <div class="popupType2" id="setTempPopup">
+    <div class="popup2Title">
+      Current temperature: <span id="currentTemp"></span>
     </div>
-    <div id="dispenseIngredients">
-
+    <div class="tempSetDiv">
+          <div class="popup2Title">
+        Set Temp: 
+    </div>
+      <span id="tempMinus">-</span>
       
+      <span id="desiredTemp"></span>
+      <span id="tempPlus">+</span>
+
     </div>
-      <div class="dispenseButtons">
-        <button id="dispenseButton">Dispense</button>
-        <button id="dispenseExitButton" style="background-color: #f6422e;">Exit</button>
-      </div> -->
+      <div class="tempButtons">
+        <button id="setTempExitButton" style="background-color: #f6422e;">Exit</button>
+      </div>
   </div>
 
 </body>
@@ -117,6 +123,7 @@ clean page
 <script src="javascript/combinationLoader.js"></script>
 <script src="javascript/drinkDeletion.js"></script>
 <script src="javascript/drinkAddition.js"></script>
+<script src="javascript/tempControl.js"></script>
 <script src="javascript/main.js"></script>
 
 

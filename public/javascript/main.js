@@ -5,7 +5,12 @@
 var socket = io();
 
 
-var item0 = {"id": 0, "name": "Lemonade", "available": true};
+var item0 = {"id": 0, 
+			"name": "Lemonade",
+			 "available": true};
+
+
+
 var item1 = {"id": 1, "name": "Iced Tea", "available": true};
 var item2 = {"id": 2, "name": "Coke", "available": true};
 var item3 = {"id": 3, "name": "Sprite", "available": true};
@@ -46,15 +51,36 @@ deleteDrinkButton.onclick = function()
 }
 
 var setTemperatureButton = document.getElementById("setTemperature");
-console.log(setTemperatureButton);
 setTemperatureButton.onclick = function()
 {
-	socket.emit("getTemperature");
-	socket.on("tempReturn", function(newTemp)
-	{
-		console.log("Server says temp is :", newTemp);
-	});
+	tempSetProcedure(socket);
+	// socket.emit("getTemperature");
+	// socket.on("tempReturn", function(newTemp)
+	// {
+	// 	console.log("Server says temp is :", newTemp);
+	// });
 }
+var currTempButton = document.getElementById("currTempButton");
+
+var tempCallback = function()
+{
+	setTimeout(function()
+	{ 
+		getTemp(socket).then(function(temp) 
+		{
+
+			/* Once the new drink has been sent to the server, the promise will resolve */
+			currTempButton.innerHTML = "(" + temp + " F)";
+			tempCallback();
+		}, function(err) 
+		{
+		  console.log(err); // Error: "It broke"
+		});
+
+	}, 3000);
+}
+tempCallback();
+
 
 // fillContainer.onclick = function()
 // {

@@ -11,8 +11,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 //var Database = require('database.js');
 
- var gpio = require('rpi-gpio');
- var gpiop = gpio.promise;
+ // var gpio = require('rpi-gpio');
+ // var gpiop = gpio.promise;
 
 app.use(express.static('public'))
 
@@ -25,6 +25,8 @@ let on = false;
 
 drinkComboObjects = [];
 var cur_num_combinations = 0;
+var desiredTemp = 50;
+var curr_temp = 80;
 
 io.on('connection', function(socket){
 	socket.on('getCombinations', function()
@@ -60,19 +62,28 @@ io.on('connection', function(socket){
 	});
 	socket.on('setTemperature', function(degrees)
 	{
+		desiredTemp = degrees;
+	});
+	socket.on('getTemp', function()
+	{
+		// var sensor = require('node-dht-sensor');
+
+		// sensor.read(22, 4, function(err, temperature, humidity) {
+		//     if (!err) {
+		//         console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
+		//             'humidity: ' + humidity.toFixed(1) + '%'
+		//         );
+		//     }
+		// });
+		socket.emit("tempReturn", curr_temp);
+		curr_temp -=1;
 
 	});
-	socket.on('getTemperature', function()
+	socket.on('getDesiredTemp', function()
 	{
-		var sensor = require('node-dht-sensor');
 
-		sensor.read(22, 4, function(err, temperature, humidity) {
-		    if (!err) {
-		        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
-		            'humidity: ' + humidity.toFixed(1) + '%'
-		        );
-		    }
-		});
+		socket.emit("desiredTempReturn", desiredTemp);
+
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
 
@@ -83,24 +94,25 @@ io.on('connection', function(socket){
 
 
 
-		gpiop.setup(18, gpio.DIR_OUT).then(() =>
-		{
-			return gpio.write(18, false)
+		// gpiop.setup(18, gpio.DIR_OUT).then(() =>
+		// {
+		// 	return gpio.write(18, false)
 			
-			}).catch((err) => {
-				console.log(err)
-		}) 
+		// 	}).catch((err) => {
+		// 		console.log(err)
+		// }) 
 
 
 
-		setTimeout(endBlink, 5000);
+		// setTimeout(endBlink, 5000);
 
 
 
 
-
+		
 		console.log("Dispensing: ", drinkId);
 	});
+
 });
 
 http.listen(3000, function(){
