@@ -38,7 +38,8 @@ var tankArray = [tank0, tank1, tank2, tank3, tank4];
 
 
 var cur_num_combinations = 0;
-
+var desiredTemp = 50;
+var curr_temp = 80;
 io.on('connection', function(socket){
 	socket.on('getCombinations', function()
 	{
@@ -73,17 +74,30 @@ io.on('connection', function(socket){
 	});
 	socket.on('setTemperature', function(degrees)
 	{
+		desiredTemp = degrees;
+	});
+	socket.on('getDesiredTemp', function()
+	{
+
+		socket.emit("desiredTempReturn", desiredTemp);
 
 	});
-	socket.on('getTemperature', function()
+	socket.on('getDesiredTemp', function()
+	{
+
+		socket.emit("desiredTempReturn", desiredTemp);
+
+	});
+	socket.on('getTemp', function()
 	{
 		sensor.read(11 , 26, function(err, temperature, humidity) {
 		    if (!err) {
-		        console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
-		            'humidity: ' + humidity.toFixed(1) + '%'
-		        );
+		        console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
+				socket.emit("tempReturn", temperature.toFixed(1) );
 		    }
 		});
+
+		
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
 
