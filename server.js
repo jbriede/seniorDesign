@@ -9,6 +9,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+const fs = require('fs');
 //var Database = require('database.js');
 var sensor = require('node-dht-sensor');
 
@@ -22,22 +23,27 @@ app.get('/', function(req, res){
 });
 
 
-let on = false;
+//let on = false;
 
-var drinkComboObjects = [];
+var update_file = function(file, data)
+{
+	let text = JSON.stringify(data);
+	fs.writeFileSync(file, text);
+}
+
+var read_file = function(file)
+{
+	let rawdata = fs.readFileSync(file);  
+  	return JSON.parse(rawdata);  
+}
+
+var tankArray = read_file('tanks.json');
 
 
-
-var tank0 = {"name": "coke", "pin": 12};
-var tank1 = {"name": "coke1", "pin": 16};
-var tank2 = {"name": "coke2", "pin": 18};
-var tank3 = {"name": "coke3", "pin": 22};
-var tank4 = {"name": "coke4", "pin": 32};
-
-var tankArray = [tank0, tank1, tank2, tank3, tank4];
+var drinkComboObjects = read_file('drinks.json');
 
 
-var cur_num_combinations = 0;
+var cur_num_combinations = drinkComboObjects.length;
 var desiredTemp = 50;
 var curr_temp = 80;
 io.on('connection', function(socket){
@@ -51,6 +57,7 @@ io.on('connection', function(socket){
 		combinationObject.id = cur_num_combinations;
 		drinkComboObjects.push(combinationObject);
 		cur_num_combinations += 1;
+		update_file('drinks.json', drinkComboObjects);
 	});
 	socket.on('deleteCombination', function(drinkId)
 	{
@@ -66,11 +73,16 @@ io.on('connection', function(socket){
 			}
 		}
 		drinkComboObjects = drinkComboObjects2;
+		update_file('drinks.json', drinkComboObjects);
 
 	});
 	socket.on('refillContainer', function(refilObject)
 	{
 
+	});
+	socket.on('getTanks', function()
+	{
+		socket.emit("tanks", tankArray);
 	});
 	socket.on('setTemperature', function(degrees)
 	{
@@ -100,6 +112,20 @@ io.on('connection', function(socket){
 		
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
+		console.log("dispense " + tankId);
+		var pin = tankArray[tankId].pin;
+		turnon(pin);
+	});
+	socket.on('stopDispense', function(){
+		console.log("Stop dispensing");
+
+		for (var i = 0; i < tankArray.length; i++)
+		{
+			var pin = tankArray[i].pin;
+			turnoff2(pin);
+			console.log("turnoff pin ", pin);
+		}
+		
 
 	});
 	socket.on('dispenseCombination', function(drinkId){
@@ -152,6 +178,17 @@ function turnoff()
 		return gpio.write(this.pin, false)
 	}).catch((err) => {
 		console.log("CANT USE PIN", this.pin)
+		console.log(err)
+	})
+}
+function turnoff2(pin)
+{
+	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	{
+		console.log("off", pin);
+		return gpio.write(pin, false)
+	}).catch((err) => {
+		console.log("CANT USE PIN", pin)
 		console.log(err)
 	})
 }

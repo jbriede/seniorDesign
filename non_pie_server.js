@@ -28,15 +28,12 @@ var read_file = function(file)
 	let rawdata = fs.readFileSync(file);  
   	return JSON.parse(rawdata);  
 }
-let on = false;
 
 var tankArray = read_file('tanks.json');
 
 
-
-//update_file("tanks.json", tankArray);
-
 var drinkComboObjects = read_file('drinks.json');
+
 var cur_num_combinations = 0;
 var desiredTemp = 50;
 var curr_temp = 80;
