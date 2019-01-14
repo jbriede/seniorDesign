@@ -32,49 +32,56 @@ var loadCombinationsProcedure = function(socket)
 	getCombinations(socket).then(function(combinations) 
 	{
 		combinationsG = combinations;
-		/* Build the HTML */
-		for (var i = 0; i < combinations.length; i++)
+		getTanks(socket).then(function(tanks) 
 		{
-			combinationsContainer.innerHTML += "<div id =\"combination-" + combinations[i].id + "\">" + combinations[i].name  + "</div>";
-		}
-		/* Set up the on click listeners */
-		for (var i = 0; i < combinations.length; i++)
-		{
-			document.getElementById("combination-" + combinations[i].id).onclick = function()
+			/* Build the HTML */
+			for (var i = 0; i < combinations.length; i++)
 			{
-				var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
-				dispensePopup.style.display = "block";
-				dispenseIngredients.innerHTML = "";
-				var drink = {};
-				/* So the drink ids dont line up with their array indices */
-				for (var i = 0; i < combinationsG.length; i+=1)
-				{
-					if (combinationsG[i].id == id)
-					{
-						drink = combinationsG[i];
-						break;
-					}
-				}
-				/* input name */
-				dispenseTitle.innerHTML = drink.name;
-				/* input ingredients */
-				for (var ingredientIndex = 0; ingredientIndex < drink.ingredients.length; ingredientIndex+=1)
-				{
-					dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].oz + "oz of "+ tankArray[drink.ingredients[ingredientIndex].tankId].name + "</div>"
-				}
-				/* Set up buttons */
-				dispenseButton.onclick = function()
-				{
-					socket.emit("dispenseCombination", id);
-				}
-				dispenseExitButton.onclick = function()
-				{
-					dispensePopup.style.display = "none";
-				}
-
+				combinationsContainer.innerHTML += "<div id =\"combination-" + combinations[i].id + "\">" + combinations[i].name  + "</div>";
 			}
+			/* Set up the on click listeners */
+			for (var i = 0; i < combinations.length; i++)
+			{
+				document.getElementById("combination-" + combinations[i].id).onclick = function()
+				{
+					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+					dispensePopup.style.display = "block";
+					dispenseIngredients.innerHTML = "";
+					var drink = {};
+					/* So the drink ids dont line up with their array indices */
+					for (var i = 0; i < combinationsG.length; i+=1)
+					{
+						if (combinationsG[i].id == id)
+						{
+							drink = combinationsG[i];
+							break;
+						}
+					}
+					/* input name */
+					dispenseTitle.innerHTML = drink.name;
+					/* input ingredients */
+					for (var ingredientIndex = 0; ingredientIndex < drink.ingredients.length; ingredientIndex+=1)
+					{
+						dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].oz + "oz of "+ tanks[drink.ingredients[ingredientIndex].tankId].name + "</div>"
+					}
+					/* Set up buttons */
+					dispenseButton.onclick = function()
+					{
+						socket.emit("dispenseCombination", id);
+					}
+					dispenseExitButton.onclick = function()
+					{
+						dispensePopup.style.display = "none";
+					}
+	
+				}
+	
+			}
+		}, function(err)
+		{
+			console.log(err)
+		});
 
-		}
 	}, function(err) 
 	{
 	  console.log(err); 
