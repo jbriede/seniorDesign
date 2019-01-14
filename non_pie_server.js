@@ -9,6 +9,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+const fs = require('fs');
 
 app.use(express.static('public'))
 
@@ -16,22 +17,26 @@ app.get('/', function(req, res){
   res.sendFile('public/index.html', {root: __dirname })
 });
 
+var update_file = function(file, data)
+{
+	let text = JSON.stringify(data);
+	fs.writeFileSync(file, text);
+}
 
+var read_file = function(file)
+{
+	let rawdata = fs.readFileSync(file);  
+  	return JSON.parse(rawdata);  
+}
 let on = false;
 
-var item0 = {"id": 0, 
-			"name": "Lemonade",
-			 "available": true};
+var tankArray = read_file('tanks.json');
 
 
 
-var item1 = {"id": 1, "name": "Iced Tea", "available": true};
-var item2 = {"id": 2, "name": "Coke", "available": true};
-var item3 = {"id": 3, "name": "Sprite", "available": true};
-var item4 = {"id": 4, "name": "Rum", "available": true};
-var tankArray = [item0, item1, item2, item3, item4];
+//update_file("tanks.json", tankArray);
 
-drinkComboObjects = [];
+var drinkComboObjects = read_file('drinks.json');
 var cur_num_combinations = 0;
 var desiredTemp = 50;
 var curr_temp = 80;
@@ -51,6 +56,7 @@ io.on('connection', function(socket){
 		combinationObject.id = cur_num_combinations;
 		drinkComboObjects.push(combinationObject);
 		cur_num_combinations += 1;
+		update_file('drinks.json', drinkComboObjects);
 	});
 	socket.on('deleteCombination', function(drinkId)
 	{
@@ -66,6 +72,7 @@ io.on('connection', function(socket){
 			}
 		}
 		drinkComboObjects = drinkComboObjects2;
+		update_file('drinks.json', drinkComboObjects);
 
 	});
 	socket.on('refillContainer', function(refilObject)
@@ -102,3 +109,6 @@ http.listen(3000, function(){
   console.log('listening on *:3000 hello');
 
 });
+
+
+
