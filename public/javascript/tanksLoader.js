@@ -32,13 +32,12 @@ var loadTanks = function(socket)
 			var dispenseButton = document.getElementById("dispenseButton-" + tanksIndex);
 			dispenseButton.onmousedown = function()
 			{
-				dispenseButton.onmouseup = function()
-				{
-
-				}
+				var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+				socket.emit("dispenseSingleDrink", id);
 			}
 			dispenseButton.onmouseup = function()
 			{
+				socket.emit("stopDispense");
 			}
         }
     }, function(err) 

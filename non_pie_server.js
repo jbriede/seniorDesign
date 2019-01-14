@@ -96,7 +96,10 @@ io.on('connection', function(socket){
 
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
-
+		console.log("dispense " + tankId);
+	});
+	socket.on('stopDispense', function(){
+		console.log("Stop dispensing");
 	});
 	socket.on('dispenseCombination', function(drinkId){
 		
