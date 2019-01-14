@@ -9,10 +9,6 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-//var Database = require('database.js');
-
- // var gpio = require('rpi-gpio');
- // var gpiop = gpio.promise;
 
 app.use(express.static('public'))
 
@@ -23,6 +19,18 @@ app.get('/', function(req, res){
 
 let on = false;
 
+var item0 = {"id": 0, 
+			"name": "Lemonade",
+			 "available": true};
+
+
+
+var item1 = {"id": 1, "name": "Iced Tea", "available": true};
+var item2 = {"id": 2, "name": "Coke", "available": true};
+var item3 = {"id": 3, "name": "Sprite", "available": true};
+var item4 = {"id": 4, "name": "Rum", "available": true};
+var tankArray = [item0, item1, item2, item3, item4];
+
 drinkComboObjects = [];
 var cur_num_combinations = 0;
 var desiredTemp = 50;
@@ -32,6 +40,10 @@ io.on('connection', function(socket){
 	socket.on('getCombinations', function()
 	{
 		socket.emit("combinations", drinkComboObjects);
+	});
+	socket.on('getTanks', function()
+	{
+		socket.emit("tanks", tankArray);
 	});
 	socket.on('newCombination', function(combinationObject)
 	{
@@ -66,15 +78,6 @@ io.on('connection', function(socket){
 	});
 	socket.on('getTemp', function()
 	{
-		// var sensor = require('node-dht-sensor');
-
-		// sensor.read(22, 4, function(err, temperature, humidity) {
-		//     if (!err) {
-		//         console.log('temp: ' + temperature.toFixed(1) + '°C, ' +
-		//             'humidity: ' + humidity.toFixed(1) + '%'
-		//         );
-		//     }
-		// });
 		socket.emit("tempReturn", curr_temp);
 		curr_temp -=1;
 
@@ -90,26 +93,6 @@ io.on('connection', function(socket){
 	});
 	socket.on('dispenseCombination', function(drinkId){
 		
-
-
-
-
-		// gpiop.setup(18, gpio.DIR_OUT).then(() =>
-		// {
-		// 	return gpio.write(18, false)
-			
-		// 	}).catch((err) => {
-		// 		console.log(err)
-		// }) 
-
-
-
-		// setTimeout(endBlink, 5000);
-
-
-
-
-		
 		console.log("Dispensing: ", drinkId);
 	});
 
@@ -119,28 +102,3 @@ http.listen(3000, function(){
   console.log('listening on *:3000 hello');
 
 });
-
-
-
-
-
-// console.log('here')
-
-
-// function turnoff()
-// {
-// 	gpiop.setup(18, gpio.DIR_OUT).then(() =>
-// 	{
-// 		return gpio.write(18, false)
-// 	}).catch((err) => {
-// 		console.log(err)
-// 	})
-// }
-
-// setTimeout(turnoff, 3000);
-
-// var GUI = require('./GUIBackend');
-//var DB = require('./database');
-
-// var databse = new DB.database("");
-
