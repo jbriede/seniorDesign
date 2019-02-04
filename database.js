@@ -1,11 +1,11 @@
 const fs = require('fs');
+
+
 class database {
-  constructor(path) 
+  constructor() 
   {
   	this.tanks = [];
   	this.drinks = [];
-  	// this.drinks.push({"name": "beer", "ingredients": [{"tankId": "2", "oz": 5}]})
-  	// this.drinks.push({"name": "blah", "ingredients": [{"tankId": "1", "oz": 2}]})
 
   	// Read drinks from files into object
   	let rawdata = fs.readFileSync('drinks.json');  
@@ -14,9 +14,9 @@ class database {
   	this.tanks = JSON.parse(rawdata);  
  	
   }
-  addDrinks(drink)
+  addCombo(combination)
   {
-
+	this.drinks.push(combination);
   	updateFile()
   }
   removeDrink(drinkId)
@@ -24,7 +24,11 @@ class database {
 
   	updateFile()
   }
-  getList()
+  getTanks()
+  {
+  	return this.tanks;
+  }
+  getDrinks()
   {
   	return this.drinks;
   }
