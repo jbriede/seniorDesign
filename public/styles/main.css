@@ -272,3 +272,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
     font-size: 20px;
 }
 
+.fillTitle
+{
+    font-size: 20px;
+    text-align: center;
+    color: #4a5d73;
+    margin-bottom: 20px;
+}

@@ -60,20 +60,9 @@ var tempCallback = function()
 }
 tempCallback();
 
+var fillTankButton = document.getElementById("fillTankButton");
+fillTankButton.onclick = function()
+{
 
-// fillContainer.onclick = function()
-// {
-
-// 	loadCombinationsProcedure(socket, tankArray); // From CombinationLoader.js
-// }
-
-// cleanContainer.onclick = function()
-// {
-
-// 	loadCombinationsProcedure(socket, tankArray); // From CombinationLoader.js
-// }
-
-// setTemperature.onclick = function()
-// {
-
-// }
+	FillTankProcedure(socket); 
+}

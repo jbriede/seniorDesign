@@ -25,9 +25,6 @@ clean page
       <button class="optionButton" id="fillTankButton">
         Fill Container
       </button>
-      <button class="optionButton" id="cleanButton">
-        Clean Container
-      </button>
       <button class="optionButton" id="setTemperature">
         Set Temp <span id="currTempButton"></span>      
       </button>
@@ -38,21 +35,6 @@ clean page
     
   </div>
   <div id="bottom">
-    <!-- <button class="dispenseButton" id="dispenseButton-1">
-      Coke
-    </button>
-    <button class="dispenseButton" id="dispenseButton-2">
-      Rum
-    </button>
-    <button class="dispenseButton" id="dispenseButton-3">
-      Whisky
-    </button>
-    <button class="dispenseButton" id="dispenseButton-4">
-      Sprite
-    </button>
-    <button class="dispenseButton" id="dispenseButton-5">
-      Tequilla
-    </button> -->
   </div>
 
   <div id="drinkAdditionContainer" class="popupContainer">
@@ -116,6 +98,20 @@ clean page
         <button id="setTempExitButton" style="background-color: #f6422e;">Exit</button>
       </div>
   </div>
+  <div class="popupType2" id="FillContainerPopup">
+    <div class="fillTitle">
+      Container Fill/Clean
+    </div>
+    <div class="FillContainerDiv">
+      <div class="fillTitle">
+        Select a container to fill or replace
+      </div>
+      <div id="fillTankOptions"></div>
+    </div>
+      <div class="tempButtons">
+        <button id="FillContainerExitButton" style="background-color: #f6422e;">Exit</button>
+      </div>
+  </div>
 
 </body>
 
@@ -125,6 +121,7 @@ clean page
 <script src="javascript/drinkDeletion.js"></script>
 <script src="javascript/drinkAddition.js"></script>
 <script src="javascript/tempControl.js"></script>
+<script src="javascript/fillContainer.js"></script>
 <script src="javascript/main.js"></script>
 
 
