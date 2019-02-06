@@ -1,23 +1,17 @@
 /*
-TODO:
-- Move File reading stuff to seperate file
-
+This program needs to:
+- control the GUI
+- Control the flow
+- Detect low water level?
+- regulate temperature
 */
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fs = require('fs');
-
-
-var Database = require('./database.js');
-
-
-var db = new Database();
-
-
-
-//var sensor = require('node-dht-sensor');
+//var Database = require('database.js');
+// var sensor = require('node-dht-sensor');
 
 //  var gpio = require('rpi-gpio');
 //  var gpiop = gpio.promise;
@@ -29,22 +23,12 @@ app.get('/', function(req, res){
 });
 
 
+//let on = false;
+
 var update_file = function(file, data)
 {
 	let text = JSON.stringify(data);
 	fs.writeFileSync(file, text);
-}
-
-var getTemp = function()
-{
-	// sensor.read(11 , 26, function(err, temperature, humidity) {
-	// 	if (!err) {
-	// 		console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
-	// 		return temperature;
-	// 	}
-	// });
-	// return null;
-	return 50;
 }
 
 var read_file = function(file)
@@ -70,8 +54,10 @@ io.on('connection', function(socket){
 	socket.on('newCombination', function(combinationObject)
 	{
 		console.log("adding : " + combinationObject);
-		db.addCombo(combinationObject);
-
+		combinationObject.id = cur_num_combinations;
+		drinkComboObjects.push(combinationObject);
+		cur_num_combinations += 1;
+		update_file('drinks.json', drinkComboObjects);
 	});
 	socket.on('deleteCombination', function(drinkId)
 	{
@@ -116,8 +102,13 @@ io.on('connection', function(socket){
 	});
 	socket.on('getTemp', function()
 	{
-		var temp = getTemp();
-		socket.emit("tempReturn", temp.toFixed(1) );
+		// sensor.read(11 , 26, function(err, temperature, humidity) {
+		//     if (!err) {
+		//         console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
+		// 		socket.emit("tempReturn", temperature.toFixed(1) );
+		//     }
+		// });
+		socket.emit("tempReturn", 30);
 		
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
@@ -176,18 +167,6 @@ http.listen(3000, function(){
 });
 
 
-var minutes = 3, the_interval = minutes * 60 * 1000;
-setInterval(function() {
-  var temp = getTemp();
-  if (temp > desiredTemp)
-  {
-	turnon(/*pin for peltier relays*/);
-  }
-  else
-  {
-	turnoff2(/**/ );
-  }
-}, the_interval);
 
 
 
