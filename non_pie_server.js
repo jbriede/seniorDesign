@@ -19,7 +19,7 @@ const fs = require('fs');
 app.use(express.static('public'))
 
 app.get('/', function(req, res){
-  res.sendFile('public/index.html', {root: __dirname })
+  res.sendFile('public/HTML/index.html', {root: __dirname })
 });
 
 

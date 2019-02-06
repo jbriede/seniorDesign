@@ -3,14 +3,22 @@
  */
 
 var socket = io();
-/* I hate jquery but I need it for this i guess. */
-$("#menuContainer").load('HTML/menu.html'); 
-var menuContainer = document.getElementById("menuContainer");
+var start = function()
+{
+    /* I hate jquery but I need it for this i guess. */
+    $("#menuContainer").load('HTML/menu.html');
+    loadCombinations(socket);
+    loadSingles(socket);
+}
 
 
 
-// loadCombinationsProcedure(socket);
-// loadTanks(socket);
+
+start();
+
+
+
+
 
 // var addDrinkButton = document.getElementById("addDrinkButton");
 // addDrinkButton.onclick = function()
