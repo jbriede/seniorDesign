@@ -25,7 +25,7 @@ var loadSingles = function(socket)
         tanksDiv.innerHTML = "";
         for (var tanksIndex = 0; tanksIndex < tanks.length; tanksIndex++)        
         {
-            tanksDiv.innerHTML += "<button class=\"dispenseButton\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
+            tanksDiv.innerHTML += "<button class=\"singlesButton\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
 		}
 		for (var tanksIndex = 0; tanksIndex < tanks.length; tanksIndex++)        
         {

@@ -9,68 +9,7 @@ body
 	width: 800px;
 	height:380px;
 }
-.optionButton
-{
-	display: block;
-	width: 180px;
-	margin-left:auto;
-    margin-right:auto;
-    height: 58px;
-    margin-top: 10px;
-    margin-bottom: 16px;
-    border-radius: 10px;
 
-}
-.dispenseButton
-{
-	width: 140px;
-    margin-left: 13px;
-    height: 60px;
-    margin-top: 16px;
-    border-radius: 10px;
-
-}
-.popupContainer
-{
-    position: absolute;
-    z-index: 50;
-    top: 17px;
-    left: 22px;
-}
-.popupTop
-{
-	background-color: #cbdff5;
-	border-radius: 10px;
-	width: 757px;
-	height: 391px;
-	padding: 5px;
-}
-.popupBottom
-{
-	background: rgb(184,225,252); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(184,225,252,1) 0%, rgba(169,210,243,1) 10%, rgba(144,186,228,1) 25%, rgba(144,188,234,1) 37%, rgba(144,191,240,1) 50%, rgba(107,168,229,1) 51%, rgba(162,218,245,1) 83%, rgba(189,243,253,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, rgba(184,225,252,1) 0%,rgba(169,210,243,1) 10%,rgba(144,186,228,1) 25%,rgba(144,188,234,1) 37%,rgba(144,191,240,1) 50%,rgba(107,168,229,1) 51%,rgba(162,218,245,1) 83%,rgba(189,243,253,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, rgba(184,225,252,1) 0%,rgba(169,210,243,1) 10%,rgba(144,186,228,1) 25%,rgba(144,188,234,1) 37%,rgba(144,191,240,1) 50%,rgba(107,168,229,1) 51%,rgba(162,218,245,1) 83%,rgba(189,243,253,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */	height: 100px;
-	border-radius: 10px;
-	height: 54px;
-}
-
-#drinkAdditionContainer
-{
-	display: none;
-	padding: 10px;
-}
-#drinkDeleteContainer
-{
-	display: none;
-	padding: 10px;
-}
-
-#dispensePopup
-{
-
-}
 
 .popupType2
 {
@@ -86,76 +25,11 @@ body
     border-radius: 14px;
 }
 
-.ingredientItem
-{
-	margin-top: 3px;
-}
-.ingredientItem select
-{
-	height: 40px;
-    width: 400px;
-    margin-right: 40px;
-	
-}
-.ingredientItem .minus
-{
-	margin-right: 20px;
-    background: #659ce0;
-    padding: 6px 13px;
-    border-radius: 18px;
-}
-.ingredientItem .plus
-{
-	margin-right: 30px;
-    background: #669ddf;
-    padding: 6px 13px;
-   border-radius: 18px;
-}
-.ingredientItem .quantity
-{
-	margin-right: 20px;
-    background-color: #c6c6c6;
-    padding: 5px 15px;
-	
-}
-.ingredientItem .delete
-{
-	margin-right: 20px;
-    background-color: #f34437;
-    padding: 5px 27px;
-	
-}
-#addIngredientButton
-{
-	margin-top: 12px;
-    padding: 5px;
-    width: 720px;
-    background-color: #649be1;
-}
 
-.PopupBottomButtons
-{
-	width: 140px;
-    margin-right: 5px;
-    height: 49px;
-    margin-top: 3px;
-    border-radius: 10px;
-    float: right;
-}
-.ingredientButtonWrapper
-{
-	height: 349px;
-}
-#drinkNameForm
-{
-    text-align: center;
-}
 
-#drinkNameForm input
-{
-	width: 200px;
-    height: 30px;
-}
+
+
+
 .drinkDeleteText
 {
 	font-size: 29px;

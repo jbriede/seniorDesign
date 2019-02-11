@@ -3,35 +3,23 @@
  */
 
 var socket = io();
+
+var popupContainer = document.getElementById("popupContainer");
+
 var start = function()
 {
     /* I hate jquery but I need it for this i guess. */
-    $("#menuContainer").load('HTML/menu.html');
-    loadCombinations(socket);
+    $("#menuContainer").load('HTML/menu.html', function()
+    {
+        setupAddListeners();
+        setupRemoveListeners()
+    });
+    loadCombinations();
     loadSingles(socket);
 }
 
 
-
-
 start();
-
-
-
-
-
-// var addDrinkButton = document.getElementById("addDrinkButton");
-// addDrinkButton.onclick = function()
-// {
-// 	addDrinkProcedure(socket).then(function(result) 
-// 	{
-// 		/* Once the new drink has been sent to the server, the promise will resolve */
-// 		loadCombinationsProcedure(socket);
-// 	}, function(err) 
-// 	{
-// 	  console.log(err); // Error: "It broke"
-// 	});
-// }
 
 // var deleteDrinkButton = document.getElementById("deleteDrinkButton");
 // deleteDrinkButton.onclick = function()

@@ -1,0 +1,14 @@
+.PopupBottomButtons
+{
+	width: 140px;
+    margin-right: 5px;
+    height: 49px;
+    margin-top: 3px;
+    border-radius: 10px;
+    float: right;
+}
+
+.PopupBottomButtons.exit
+{
+    background-color: #f6422e;
+}

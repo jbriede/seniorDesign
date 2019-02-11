@@ -24,7 +24,7 @@ var dispenseExitButton = document.getElementById("dispenseExitButton");
 var dispenseTitle = document.getElementById("dispenseTitle");
 
 /* This is called when the app starts and everytime something changes */
-var loadCombinations = function(socket)
+var loadCombinations = function()
 {
 	combinationsContainer.innerHTML = "";
 
