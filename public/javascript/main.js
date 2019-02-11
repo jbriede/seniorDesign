@@ -12,7 +12,8 @@ var start = function()
     $("#menuContainer").load('HTML/menu.html', function()
     {
         setupAddListeners();
-        setupRemoveListeners()
+        setupRemoveListeners();
+        setupTempListeners();
     });
     loadCombinations();
     loadSingles(socket);

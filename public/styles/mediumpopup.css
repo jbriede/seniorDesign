@@ -1,0 +1,20 @@
+.mediumPopup
+{
+    padding: 10px;
+    position: absolute;
+    z-index: 50;
+    top: 57px;
+    left: 226px;
+    background-color: #cce0f5;
+    width: 400px;
+    height: 300px;
+    border-radius: 14px;
+}
+
+.mediumPopupTitle
+{
+    font-size: 20px;
+    text-align: center;
+    color: #4a5d73;
+    margin-bottom: 55px;
+}
