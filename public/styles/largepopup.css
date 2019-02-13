@@ -6,6 +6,12 @@
     left: 22px;
     padding: 10px;
 }
+.largePopupTitle
+{
+	font-size: 23px;
+    padding: 5px;
+    border-bottom: solid;
+}
 .largePopupTop
 {
 	background-color: #cbdff5;

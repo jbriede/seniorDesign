@@ -47,7 +47,7 @@ var loadCombinations = function()
 						var dispenseIngredients = document.getElementById("dispenseIngredients");
 						var dispenseButton = document.getElementById("dispenseButton");
 						var dispenseExitButton = document.getElementById("dispenseExitButton");
-						var dispenseTitle = document.getElementById("dispenseTitle");
+						var dispenseTitle = document.getElementById("mediumPopupTitle");
 						popupContainer.style.display = "block";
 						var drink = {};
 						/* So the drink ids dont line up with their array indices */

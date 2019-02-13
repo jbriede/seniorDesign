@@ -13,8 +13,14 @@
 
 .mediumPopupTitle
 {
+	text-align: center;
     font-size: 20px;
-    text-align: center;
+    border-bottom: solid;
     color: #4a5d73;
-    margin-bottom: 55px;
+    margin-bottom: 6px;
+}
+
+.mediumPopupTop
+{
+	height: 251px;
 }

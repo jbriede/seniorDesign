@@ -43,7 +43,7 @@ function addDrinkProcedure()
                             optionString += "<option value=" + tankArray[index].id + ">" + tankArray[index].name + "</option>"
                         }
                         /* Long important line of html here */
-                        ingredientContainer.innerHTML += "<div class=\"ingredientItem\" id=\"ingredientItem-" + ingredientsIndex +"\"><select id=\"selector-" + ingredientsIndex + "\">" + optionString + "</select><span class=\"minus\" id=\"minus-" + ingredientsIndex + "\">-</span><span class=\"quantity\" id=\"quantity-" + ingredientsIndex + "\">" + ingredients[ingredientsIndex].oz.toFixed(1) + " oz</span><span class=\"plus\" id=\"plus-" + ingredientsIndex + "\">+</span><span class=\"delete\" id=\"delete-" + ingredientsIndex + "\">Delete</span></div>";
+                        ingredientContainer.innerHTML += "<div class=\"ingredientItem\" id=\"ingredientItem-" + ingredientsIndex +"\"><select id=\"selector-" + ingredientsIndex + "\">" + optionString + "</select><span class=\"minusButton\" id=\"minus-" + ingredientsIndex + "\">-</span><span class=\"quantity\" id=\"quantity-" + ingredientsIndex + "\">" + ingredients[ingredientsIndex].oz.toFixed(1) + " oz</span><span class=\"plusButton\" id=\"plus-" + ingredientsIndex + "\">+</span><span class=\"deleteButton\" id=\"delete-" + ingredientsIndex + "\">Delete</span></div>";
                     }
                     /* Now set up listeners for html array elements */
                     for (var ingredientsIndex = 0; ingredientsIndex < ingredients.length; ingredientsIndex++)
