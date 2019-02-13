@@ -29,6 +29,7 @@ function deleteDrinkProcedure()
                     {
                         var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
                         socket.emit("deleteCombination", id)	
+                        loadCombinations();
                         deleteDrinkProcedure(socket);
                         resolve();
                     };

@@ -1,0 +1,10 @@
+#tankOptions
+{
+    display: none;
+}
+.configItem
+{
+	margin: 10px 5px;
+    background-color: #99c3ec;
+    padding: 12px;
+}

@@ -14,6 +14,7 @@ var start = function()
         setupAddListeners();
         setupRemoveListeners();
         setupTempListeners();
+        setupFillListeners();
     });
     loadCombinations();
     loadSingles();
