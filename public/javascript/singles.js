@@ -1,7 +1,7 @@
 
 
 /* Ask server for list of tanks */
-var getTanks = function(socket)
+var getTanks = function()
 {
 	return new Promise(function(resolve, reject) 
 	{
@@ -18,9 +18,9 @@ var getTanks = function(socket)
 var tanksG = [];
 
 var tanksDiv = document.getElementById("singles");
-var loadSingles = function(socket)
+var loadSingles = function()
 {
-    getTanks(socket).then(function(tanks) 
+    getTanks().then(function(tanks) 
 	{
         tanksDiv.innerHTML = "";
         for (var tanksIndex = 0; tanksIndex < tanks.length; tanksIndex++)        

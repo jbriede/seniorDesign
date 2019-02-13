@@ -23,7 +23,7 @@ function addDrinkProcedure()
 
 		getTanks(socket).then(function(tankArray)
 		{
-						/* Initialize to 0 ingredeints */
+            /* Initialize to 0 ingredeints */
 			var ingredients = [];
             /* Function refills HTML elements based on contents of ingredients[] */
             $("#popupContainer").load('HTML/add.html', function()

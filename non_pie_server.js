@@ -44,6 +44,10 @@ var drinkComboObjects = read_file('drinks.json');
 
 
 var cur_num_combinations = drinkComboObjects.length;
+if (drinkComboObjects.length > 0)
+{
+	cur_num_combinations = drinkComboObjects[drinkComboObjects.length-1].id + 1;
+}
 var desiredTemp = 50;
 var curr_temp = 80;
 io.on('connection', function(socket){

@@ -16,7 +16,7 @@ var start = function()
         setupTempListeners();
     });
     loadCombinations();
-    loadSingles(socket);
+    loadSingles();
 }
 
 
