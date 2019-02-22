@@ -5,13 +5,22 @@
         </div>
         <div id="combosSelection"></div>
         <div id="tankOptions">
-            <div class=nameUpdateDiv>
-                <form id="tankUpdateForm">
-                    Name: <input type="text" id="tankNameText" name="tankName"><br>
-                    Amount: <input type="text" id="tankOzText" name="tankOz"><br>
-                    <input type="checkbox" name="New" value="New"> Select if using a new fluid.<br>
-                </form>
+
+            <form id="tankUpdateForm">
+                Name: <input type="text" id="tankNameText" name="tankName"><br>
+            </form>
+
+            <input type="checkbox" name="New" value="New" id="newLiquidCheckbox"> Select if using a new fluid.<br>
+
+            <select id="defaultFillOptions">
+                
+            </select>
+
+            <div id="customFillDiv" style="display: none;">
+                Amount: <input type="text" id="tankMLText" name="tankML">
             </div>
+
+                
         </div>
     </div>
     <div class="largePopupBottom">

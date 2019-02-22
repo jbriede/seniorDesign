@@ -15,6 +15,7 @@ var start = function()
         setupRemoveListeners();
         setupTempListeners();
         setupFillListeners();
+        setupCleanListeners();
     });
     loadCombinations();
     loadSingles();
