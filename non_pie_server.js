@@ -10,6 +10,11 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fs = require('fs');
+//var Database = require('database.js');
+// var sensor = require('node-dht-sensor');
+
+//  var gpio = require('rpi-gpio');
+//  var gpiop = gpio.promise;
 
 
 const Database = require('./database.js');

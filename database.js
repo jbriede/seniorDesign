@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 
+<<<<<<< HEAD
 //add_combo
 //delete_combo
 //get_combos
@@ -15,6 +16,13 @@ class Database {
   {
   	this.tanks = [];
   	this.combos = [];
+=======
+class database {
+  constructor() 
+  {
+  	this.tanks = [];
+  	this.drinks = [];
+>>>>>>> 3710c81e51a6ea3606fae57f227c50abcf162028
 
   	// Read drinks from files into object
   	let rawdata = fs.readFileSync('drinks.json');  
@@ -29,12 +37,19 @@ class Database {
     } 
  	
   }
+<<<<<<< HEAD
   add_combo(combination)
   {
     combination.id = this.cur_num_combinations;
 		this.combos.push(combination);
 		this.cur_num_combinations += 1;
   	this.updateFile()
+=======
+  addCombo(combination)
+  {
+	this.drinks.push(combination);
+  	updateFile()
+>>>>>>> 3710c81e51a6ea3606fae57f227c50abcf162028
   }
   delete_combo(drinkId)
   {
@@ -58,7 +73,15 @@ class Database {
   {
   	return this.tanks;
   }
+<<<<<<< HEAD
   get_combos()
+=======
+  getTanks()
+  {
+  	return this.tanks;
+  }
+  getDrinks()
+>>>>>>> 3710c81e51a6ea3606fae57f227c50abcf162028
   {
     return this.combos;
   }
