@@ -11,79 +11,83 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fs = require('fs');
 
+
+const Database = require('./database.js');
+
+var db = new Database();
+
+
+
+
+// var sensor = require('node-dht-sensor');
+
+//  var gpio = require('rpi-gpio');
+//  var gpiop = gpio.promise;
+
 app.use(express.static('public'))
 
 app.get('/', function(req, res){
-  res.sendFile('public/index.html', {root: __dirname })
+  res.sendFile('public/HTML/index.html', {root: __dirname })
 });
 
-var update_file = function(file, data)
-{
-	let text = JSON.stringify(data);
-	fs.writeFileSync(file, text);
-}
 
-var read_file = function(file)
-{
-	let rawdata = fs.readFileSync(file);  
-  	return JSON.parse(rawdata);  
-}
+//let on = false;
 
-var tankArray = read_file('tanks.json');
+// var update_file = function(file, data)
+// {
+// 	let text = Jdb.add_combo();SON.stringify(data);
+// 	fs.writeFileSync(file, text);
+// }
 
+//Database.update_file()
 
-var drinkComboObjects = read_file('drinks.json');
+// var read_file = function(file)
+// {
+// 	let rawdata = fs.readFileSync(file);  
+//   	return JSON.parse(rawdata);  
+// }
 
-var cur_num_combinations = 0;
+//var tankArray = read_file('tanks.json');
+
+//var drinkComboObjects = read_file('drinks.json');
+//var cur_num_combinations = drinkComboObjects.length;
+
 var desiredTemp = 50;
 var curr_temp = 80;
-
 io.on('connection', function(socket){
 	socket.on('getCombinations', function()
 	{
-		socket.emit("combinations", drinkComboObjects);
-	});
-	socket.on('getTanks', function()
-	{
-		socket.emit("tanks", tankArray);
+		socket.emit("combinations", db.get_combos());
 	});
 	socket.on('newCombination', function(combinationObject)
 	{
 		console.log("adding : " + combinationObject);
-		combinationObject.id = cur_num_combinations;
-		drinkComboObjects.push(combinationObject);
-		cur_num_combinations += 1;
-		update_file('drinks.json', drinkComboObjects);
+		db.add_combo(combinationObject);
 	});
+
 	socket.on('deleteCombination', function(drinkId)
 	{
 		console.log("deleting : " + drinkId);
-		var drinkComboObjects2 = [];
-		var count = 0;
-		for (var index = 0; index < drinkComboObjects.length; index++)
-		{
-			if (drinkComboObjects[index].id != drinkId)
-			{
-				drinkComboObjects2[count] = drinkComboObjects[index];
-				count+=1;	
-			}
-		}
-		drinkComboObjects = drinkComboObjects2;
-		update_file('drinks.json', drinkComboObjects);
+
+		db.delete_combo(drinkId);
 
 	});
 	socket.on('refillContainer', function(refilObject)
 	{
 
 	});
+	socket.on('getTanks', function()
+	{
+		socket.emit("tanks", db.get_tanks());
+	});
 	socket.on('setTemperature', function(degrees)
 	{
 		desiredTemp = degrees;
 	});
-	socket.on('getTemp', function()
+	socket.on('getDesiredTemp', function()
 	{
-		socket.emit("tempReturn", curr_temp);
-		curr_temp -=1;
+
+		socket.emit("desiredTempReturn", desiredTemp);
 
 	});
 	socket.on('getDesiredTemp', function()
@@ -92,17 +96,66 @@ io.on('connection', function(socket){
 		socket.emit("desiredTempReturn", desiredTemp);
 
 	});
+	socket.on('getTemp', function()
+	{
+		// sensor.read(11 , 26, function(err, temperature, humidity) {
+		//     if (!err) {
+		//         console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
+		// 		socket.emit("tempReturn", temperature.toFixed(1) );
+		//     }
+		// });
+		socket.emit("tempReturn", 30);
+		
+	});
 	socket.on('dispenseSingleDrink', function(tankId){
 		console.log("dispense " + tankId);
+		var tanks = db.get_tanks();
+		var pin = tanks[tankId].pin;
+		turnon(pin);
 	});
 	socket.on('stopDispense', function(){
 		console.log("Stop dispensing");
+		var tankArray = db.combos;
+		for (var i = 0; i < tankArray.length; i++)
+		{
+			var pin = tankArray[i].pin;
+			turnoff2(pin);
+			console.log("turnoff pin ", pin);
+		}
+		
+
 	});
 	socket.on('dispenseCombination', function(drinkId){
-		
+		var tankArray = db.combos;
+                
+		console.log("Dispensing: ", drinkId);
+		//console.log(drinkComboObjects);
+
+		for (var index = 0; index < drinkComboObjects.length; index++)
+		{
+			if (drinkComboObjects[index].id == drinkId)
+			{
+				var drink = drinkComboObjects[index];
+
+
+				for (var i = 0; i < drink.ingredients.length; i++)
+				{
+					var ingredient = drink.ingredients[i];
+					var tankId = ingredient.tankId;
+					var amount = ingredient.oz;
+					var pin = tankArray[tankId].pin;
+					console.log(pin);
+
+					turnon(pin);
+
+					setTimeout(turnoff.bind({pin: pin}), amount*1000); //modified to use bind. Bind ties each call to current paramaters
+					
+				}
+				break;
+			}
+		}
 		console.log("Dispensing: ", drinkId);
 	});
-
 });
 
 http.listen(3000, function(){
@@ -111,4 +164,47 @@ http.listen(3000, function(){
 });
 
 
+
+
+
+function turnoff()
+{
+	// gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
+	// {
+	// 	console.log("off", this.pin);
+	// 	return gpio.write(this.pin, false)
+	// }).catch((err) => {
+	// 	console.log("CANT USE PIN", this.pin)
+	// 	console.log(err)
+	// })
+}
+function turnoff2(pin)
+{
+	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	// {
+	// 	console.log("off", pin);
+	// 	return gpio.write(pin, false)
+	// }).catch((err) => {
+	// 	console.log("CANT USE PIN", pin)
+	// 	console.log(err)
+	// })
+}
+
+function turnon(pin)
+{
+	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	// {
+	// 	return gpio.write(pin, true)
+	// }).catch((err) => {
+	// 	console.log(err)
+	// })
+}
+    
+
+
+
+// var GUI = require('./GUIBackend');
+//var DB = require('./database');
+
+// var databse = new DB.database("");
 

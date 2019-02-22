@@ -1,0 +1,71 @@
+.PopupBottomButtons
+{
+	width: 140px;
+    margin-right: 5px;
+    height: 49px;
+    margin-top: 3px;
+    border-radius: 10px;
+    float: right;
+}
+
+.PopupBottomButtons.exit
+{
+    background-color: #f6422e;
+}
+
+.menuButton
+{
+	display: block;
+	width: 180px;
+	margin-left:auto;
+    margin-right:auto;
+    height: 58px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+}
+
+#combinations > div {
+	background-color: #f1f1f1;
+	width: 177px;
+	margin: 10px;
+	text-align: center;
+	height: 73px;
+	line-height: 72px;
+	border-radius: 10px;
+	border: solid;
+	border-width: 1px;
+
+}
+
+.minusButton
+{
+	margin-right: 20px;
+    background: #659ce0;
+    padding: 5px 14px 7px 16px;
+    border-radius: 18px;
+    font-size: 20px;
+}
+.plusButton
+{
+	margin-right: 30px;
+    background: #669ddf;
+    padding: 5px 14px 7px 13px;
+   	border-radius: 18px;
+   font-size: 20px;
+}
+.deleteButton
+{
+	margin-right: 20px;
+    background-color: #f34437;
+    padding: 5px 27px;
+}
+.singlesButton
+{
+    width: 120px;
+    margin-left: 11px;
+    height: 77px;
+    margin-top: 13px;
+    border-radius: 10px;
+    font-size: 16px;
+}

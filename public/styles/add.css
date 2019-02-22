@@ -1,0 +1,39 @@
+.ingredientButtonWrapper
+{
+	height: 312px;
+}
+.ingredientItem
+{
+	margin-top: 3px;
+}
+.ingredientItem select
+{
+	height: 40px;
+    width: 400px;
+    margin-right: 40px;
+}
+
+.ingredientItem .quantity
+{
+	margin-right: 20px;
+    background-color: #c6c6c6;
+    padding: 5px 15px;
+	
+}
+#addIngredientButton
+{
+	margin-top: 12px;
+    padding: 5px;
+    width: 720px;
+    background-color: #649be1;
+}
+#drinkNameForm
+{
+    text-align: center;
+}
+
+#drinkNameForm input
+{
+	width: 200px;
+    height: 30px;
+}

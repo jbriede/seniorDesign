@@ -1,0 +1,23 @@
+
+.tempSetDiv
+{
+    text-align: center;
+    font-size: 23px;
+    margin-top: 75px;
+}
+.SetTempText
+{
+    text-align: center;
+    font-size: 24px;
+    color: #4a5d73;
+    margin-bottom: 6px;
+}
+#tempMinus
+{
+    margin-right: 8px;
+}
+#tempPlus
+{
+    margin-right: 0px;
+    margin-left: 5px;
+}

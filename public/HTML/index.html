@@ -7,7 +7,7 @@ clean page
 -->
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <title>Page Title</title>
@@ -25,9 +25,6 @@ clean page
       <button class="optionButton" id="fillTankButton">
         Fill Container
       </button>
-      <button class="optionButton" id="cleanButton">
-        Clean Container
-      </button>
       <button class="optionButton" id="setTemperature">
         Set Temp <span id="currTempButton"></span>      
       </button>
@@ -38,21 +35,6 @@ clean page
     
   </div>
   <div id="bottom">
-    <!-- <button class="dispenseButton" id="dispenseButton-1">
-      Coke
-    </button>
-    <button class="dispenseButton" id="dispenseButton-2">
-      Rum
-    </button>
-    <button class="dispenseButton" id="dispenseButton-3">
-      Whisky
-    </button>
-    <button class="dispenseButton" id="dispenseButton-4">
-      Sprite
-    </button>
-    <button class="dispenseButton" id="dispenseButton-5">
-      Tequilla
-    </button> -->
   </div>
 
   <div id="drinkAdditionContainer" class="popupContainer">
@@ -116,6 +98,20 @@ clean page
         <button id="setTempExitButton" style="background-color: #f6422e;">Exit</button>
       </div>
   </div>
+  <div class="popupType2" id="FillContainerPopup">
+    <div class="fillTitle">
+      Container Fill/Clean
+    </div>
+    <div class="FillContainerDiv">
+      <div class="fillTitle">
+        Select a container to fill or replace
+      </div>
+      <div id="fillTankOptions"></div>
+    </div>
+      <div class="tempButtons">
+        <button id="FillContainerExitButton" style="background-color: #f6422e;">Exit</button>
+      </div>
+  </div>
 
 </body>
 
@@ -125,7 +121,52 @@ clean page
 <script src="javascript/drinkDeletion.js"></script>
 <script src="javascript/drinkAddition.js"></script>
 <script src="javascript/tempControl.js"></script>
+<script src="javascript/fillContainer.js"></script>
 <script src="javascript/main.js"></script>
+
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" type="text/css" href="../styles/main.css">
+<link rel="stylesheet" type="text/css" href="../styles/buttons.css">
+<link rel="stylesheet" type="text/css" href="../styles/menu.css">
+<link rel="stylesheet" type="text/css" href="../styles/combinations.css">
+<link rel="stylesheet" type="text/css" href="../styles/singles.css">
+<link rel="stylesheet" type="text/css" href="../styles/largepopup.css">
+<link rel="stylesheet" type="text/css" href="../styles/mediumpopup.css">
+<link rel="stylesheet" type="text/css" href="../styles/add.css">
+<link rel="stylesheet" type="text/css" href="../styles/remove.css">
+<link rel="stylesheet" type="text/css" href="../styles/temperature.css">
+<link rel="stylesheet" type="text/css" href="../styles/dispense.css">
+</head>
+<body>
+  <div id="top">
+    <div id="menuContainer">
+      <!-- Populate with Settings -->
+    </div>
+    <div id="combinations">
+      <!-- Populate with Combinations -->
+    </div>
+  </div>
+  <div id="singles">
+    <!-- Populate with Single Drinks -->
+  </div>
+  <div id="popupContainer">
+    <!-- Populate with Popups -->
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../javascript/combinations.js"></script>
+<script src="../javascript/singles.js"></script>
+<script src="../javascript/add.js"></script>
+<script src="../javascript/remove.js"></script>
+<script src="../javascript/temperature.js"></script>
+<script src="../javascript/main.js"></script>
 
 
 </html>
