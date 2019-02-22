@@ -64,7 +64,7 @@ var loadCombinations = function()
 						/* input ingredients */
 						for (var ingredientIndex = 0; ingredientIndex < drink.ingredients.length; ingredientIndex+=1)
 						{
-							dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].oz + "oz of "+ tanks[drink.ingredients[ingredientIndex].tankId].name + "</div>"
+							dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].parts + " parts "+ tanks[drink.ingredients[ingredientIndex].tankId].name + "</div>"
 						}
 						/* Set up buttons */
 						dispenseButton.onclick = function()
