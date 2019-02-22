@@ -120,7 +120,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('stopDispense', function(){
 		console.log("Stop dispensing");
-		var tankArray = db.combos;
+		var tankArray = db.get_tanks;
 		for (var i = 0; i < tankArray.length; i++)
 		{
 			var pin = tankArray[i].pin;
@@ -131,7 +131,8 @@ io.on('connection', function(socket){
 
 	});
 	socket.on('dispenseCombination', function(drinkId){
-		var tankArray = db.combos;
+		var drinkComboObjects = db.get_combos;
+		var tankArray = db.get_tanks();
                 
 		console.log("Dispensing: ", drinkId);
 		//console.log(drinkComboObjects);

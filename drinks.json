@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"name":"Arnold Palmer","ingredients":[{"tankId":0,"oz":2},{"tankId":"1","oz":2}],"id":13}]
+=======
+[{"name":"oven","ingredients":[{"tankId":0,"oz":0}],"id":7}]
+>>>>>>> 121e6115cb00e61a6d1897c950e806ee64bcd010
