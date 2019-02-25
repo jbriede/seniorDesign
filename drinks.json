@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 [{"name":"oven","ingredients":[{"tankId":0,"oz":0}],"id":7},{"name":"JEWS","ingredients":[{"tankId":0,"oz":4}],"id":8}]
-=======
-[{"name":"oven","ingredients":[{"tankId":0,"oz":0}],"id":7},{"name":"TEST","ingredients":[{"tankId":0,"parts":1},{"tankId":0,"parts":2}],"id":8},{"name":"Burbon Coke","ingredients":[{"tankId":0,"parts":1},{"tankId":"3","parts":1}],"id":9},{"name":"","ingredients":[{"tankId":0,"parts":1},{"tankId":"1","parts":1}],"id":10}]
->>>>>>> 490b34315d73f18dca219df1f49265614dbcd657
