@@ -4,13 +4,13 @@ class Dispenser {
     constructor(db) 
     {
        this.db = db;
-       this.seconds_per_ml = 1
+       this.ml_per_second = 50
        
     }
    
     dispense_combo(drink_id, ml)
     {
-        
+
         var tankArray = this.db.get_tanks();
         var total_parts = 0;
         var drink = this.db.find_drink(drink_id);
@@ -28,7 +28,7 @@ class Dispenser {
 
             var ratio = drink.ingredients[i].parts/total_parts;
             var ml_ratio = ratio*ml;
-            var seconds = ml_ratio * this.seconds_per_ml;
+            var seconds = ml_ratio / this.ml_per_second;
             console.log("   drink ", tankArray[tank_id].name, " seconds ", seconds);
 
             this.turnon(pin);
