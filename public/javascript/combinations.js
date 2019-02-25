@@ -71,8 +71,8 @@ var loadCombinations = function()
 						{
 							var dispenseObj = {}
 							dispenseObj.id = id;
-							dispenseObj.mL = 300;
-							socket.emit("dispenseCombination", id);
+							dispenseObj.ml = 300;
+							socket.emit("dispenseCombination", dispenseObj);
 						}
 						dispenseExitButton.onclick = function()
 						{

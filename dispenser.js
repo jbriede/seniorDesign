@@ -4,13 +4,13 @@ class Dispenser {
     constructor(db) 
     {
        this.db = db;
-       var seconds_per_ml = 1
+       this.seconds_per_ml = 1
        
     }
    
     dispense_combo(drink_id, ml)
     {
-
+        
         var tankArray = this.db.get_tanks();
         var total_parts = 0;
         var drink = this.db.find_drink(drink_id);
@@ -19,10 +19,10 @@ class Dispenser {
             total_parts = drink.ingredients[i].parts + total_parts;
         }
 
-        for (var i = 0; i < drink.ingredients.legnth; i++)
+        for (var i = 0; i < drink.ingredients.length; i++)
         {
             // var pin = drink.ingredients[i].pin;
-            var tank_id = drink.ingredients[i].tankID;
+            var tank_id = drink.ingredients[i].tankId;
             var pin = tankArray[tank_id].pin;
 
 
@@ -31,9 +31,9 @@ class Dispenser {
             var seconds = ml_ratio * this.seconds_per_ml;
             console.log("   drink ", tankArray[tank_id].name, " seconds ", seconds);
 
-            turnon(pin);
+            this.turnon(pin);
 
-            setTimeout(turnoff.bind({pin: pin}), seconds*1000); //modified to use bind. Bind ties each call to current paramaters
+            setTimeout(this.turnoff.bind({pin: pin}), seconds*1000); //modified to use bind. Bind ties each call to current paramaters
 
         }
 
