@@ -1,15 +1,6 @@
 const fs = require('fs');
 
 
-//add_combo
-//delete_combo
-//get_combos
-//get_tanks
-
-
-//update_files
-
-
 class Database {
   constructor() 
   {
@@ -70,6 +61,16 @@ class Database {
   	fs.writeFileSync('tanks.json', data);
   }
 
+  find_drink(drink_id)
+  {
+    for (var i = 0; i < this.combos.length; i++)
+    {
+      if (this.combos[i].id == drink_id)
+      {
+        return(this.combos[i]);
+      }
+    }
+  }
 }
 
 module.exports = Database;  

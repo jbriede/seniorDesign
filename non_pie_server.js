@@ -16,10 +16,12 @@ const fs = require('fs');
 //  var gpio = require('rpi-gpio');
 //  var gpiop = gpio.promise;
 
-
 const Database = require('./database.js');
 
 var db = new Database();
+
+const Dispenser = require('./dispenser.js');
+var dispense = new Dispenser(db);
 
 
 
@@ -130,37 +132,18 @@ io.on('connection', function(socket){
 		
 
 	});
-	socket.on('dispenseCombination', function(drinkId){
-		var drinkComboObjects = db.get_combos;
-		var tankArray = db.get_tanks();
-                
-		console.log("Dispensing: ", drinkId);
-		//console.log(drinkComboObjects);
 
-		for (var index = 0; index < drinkComboObjects.length; index++)
-		{
-			if (drinkComboObjects[index].id == drinkId)
-			{
-				var drink = drinkComboObjects[index];
+	// dispenseObj 
+	// {
+	// 	drinkid: 2,
+	// 	mL: 200
+	// }
 
 
-				for (var i = 0; i < drink.ingredients.length; i++)
-				{
-					var ingredient = drink.ingredients[i];
-					var tankId = ingredient.tankId;
-					var amount = ingredient.oz;
-					var pin = tankArray[tankId].pin;
-					console.log(pin);
+	socket.on('dispenseCombination', function(dispenseObj){ 
+		var drink_id = dispenseObj.id; 	// drinkId 
+		dispense.dispense_combo(drink_id, dispenseObj.ml);
 
-					turnon(pin);
-
-					setTimeout(turnoff.bind({pin: pin}), amount*1000); //modified to use bind. Bind ties each call to current paramaters
-					
-				}
-				break;
-			}
-		}
-		console.log("Dispensing: ", drinkId);
 	});
 });
 
