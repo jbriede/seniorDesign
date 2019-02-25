@@ -3,7 +3,7 @@
  */
 
 /* Call back function for add button */
-function fillProcedure()
+function fillProcedureInternal()
 {
 	return new Promise(function(resolve, reject) {
         popupContainer.style.display = "block";
@@ -100,18 +100,14 @@ function fillProcedure()
 	});
 }
 
-function setupFillListeners()
+function fillProcedure()
 {
-    var fillTankButton = document.getElementById("fillTankButton");
-    fillTankButton.onclick = function()
+    fillProcedureInternal().then(function(result) 
     {
-        fillProcedure().then(function(result) 
-        {
-            /* Once the new drink has been sent to the server, the promise will resolve */
-            loadSingles();
-        }, function(err) 
-        {
-        console.log(err); // Error: "It broke"
-        });
-    }
+        /* Once the new drink has been sent to the server, the promise will resolve */
+        loadSingles();
+    }, function(err) 
+    {
+    console.log(err); // Error: "It broke"
+    });
 }

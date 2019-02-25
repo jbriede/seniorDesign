@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../styles/singles.css">
 <link rel="stylesheet" type="text/css" href="../styles/largepopup.css">
 <link rel="stylesheet" type="text/css" href="../styles/mediumpopup.css">
+<link rel="stylesheet" type="text/css" href="../styles/smallpopup.css">
 <link rel="stylesheet" type="text/css" href="../styles/add.css">
 <link rel="stylesheet" type="text/css" href="../styles/remove.css">
 <link rel="stylesheet" type="text/css" href="../styles/temperature.css">
@@ -31,6 +32,9 @@
   <div id="popupContainer">
     <!-- Populate with Popups -->
   </div>
+  <div id="smallPopupContainer" style="display:none;">
+    <!-- Populate with alerts and such -->
+  </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
@@ -41,6 +45,7 @@
 <script src="../javascript/temperature.js"></script>
 <script src="../javascript/fill.js"></script>
 <script src="../javascript/clean.js"></script>
+<script src="../javascript/prefillPopup.js"></script>
 <script src="../javascript/main.js"></script>
 
 
