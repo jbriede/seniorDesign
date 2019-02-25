@@ -9,7 +9,7 @@
 
 
 
-var oz_inc_dec_size = 2;
+var parts_inc_dec_size = 1;
 
 
 var ingredientsContainer = document.getElementById("ingredientContainer");
@@ -43,7 +43,7 @@ function addDrinkProcedure()
                             optionString += "<option value=" + tankArray[index].id + ">" + tankArray[index].name + "</option>"
                         }
                         /* Long important line of html here */
-                        ingredientContainer.innerHTML += "<div class=\"ingredientItem\" id=\"ingredientItem-" + ingredientsIndex +"\"><select id=\"selector-" + ingredientsIndex + "\">" + optionString + "</select><span class=\"minusButton\" id=\"minus-" + ingredientsIndex + "\">-</span><span class=\"quantity\" id=\"quantity-" + ingredientsIndex + "\">" + ingredients[ingredientsIndex].oz.toFixed(1) + " oz</span><span class=\"plusButton\" id=\"plus-" + ingredientsIndex + "\">+</span><span class=\"deleteButton\" id=\"delete-" + ingredientsIndex + "\">Delete</span></div>";
+                        ingredientContainer.innerHTML += "<div class=\"ingredientItem\" id=\"ingredientItem-" + ingredientsIndex +"\"><select id=\"selector-" + ingredientsIndex + "\">" + optionString + "</select><span class=\"minusButton\" id=\"minus-" + ingredientsIndex + "\">-</span><span class=\"quantity\" id=\"quantity-" + ingredientsIndex + "\">" + ingredients[ingredientsIndex].parts.toFixed(1) + " parts</span><span class=\"plusButton\" id=\"plus-" + ingredientsIndex + "\">+</span><span class=\"deleteButton\" id=\"delete-" + ingredientsIndex + "\">Delete</span></div>";
                     }
                     /* Now set up listeners for html array elements */
                     for (var ingredientsIndex = 0; ingredientsIndex < ingredients.length; ingredientsIndex++)
@@ -72,9 +72,9 @@ function addDrinkProcedure()
                         {
                             var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
                             /*Just change value in array and redraw */
-                            if (!(ingredients[id].oz < 0.1))
+                            if (!(ingredients[id].parts < 0.1))
                             {
-                                ingredients[id].oz -= oz_inc_dec_size;
+                                ingredients[id].parts -= parts_inc_dec_size;
                             }
                             rebuildIngredeints();
                         }
@@ -84,9 +84,9 @@ function addDrinkProcedure()
                         {
                             var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
                             /* Just change value in array and redraw */
-                            if (!(ingredients[id].oz > 12.0))
+                            if (!(ingredients[id].parts > 12.0))
                             {
-                                ingredients[id].oz += oz_inc_dec_size
+                                ingredients[id].parts += parts_inc_dec_size
                             }
                             rebuildIngredeints();
                         }
@@ -108,7 +108,7 @@ function addDrinkProcedure()
                 addIngredientButton.onclick = function()
                 {
                     /* By default use whatever is in first tank */
-                    ingredients.push({"tankId": 0, "oz": 0});
+                    ingredients.push({"tankId": 0, "parts": 0});
                     /* Now redraw to update html */
                     rebuildIngredeints();
                 }

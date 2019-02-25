@@ -5,6 +5,7 @@
 var socket = io();
 
 var popupContainer = document.getElementById("popupContainer");
+var smallPopupContainer = document.getElementById("smallPopupContainer");
 
 var start = function()
 {
@@ -14,7 +15,7 @@ var start = function()
         setupAddListeners();
         setupRemoveListeners();
         setupTempListeners();
-        setupFillListeners();
+        setupFillPopupListeners();
         setupCleanListeners();
     });
     loadCombinations();
