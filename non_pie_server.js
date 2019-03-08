@@ -17,8 +17,11 @@ const fs = require('fs');
 //  var gpiop = gpio.promise;
 
 const Database = require('./database.js');
+const TemperatureRegulator = require('./temperatureRegulator.js');
 
 var db = new Database();
+var temp = new TemperatureRegulator();
+
 
 const Dispenser = require('./dispenser.js');
 var dispense = new Dispenser(db);
@@ -37,8 +40,8 @@ app.get('/', function(req, res){
   res.sendFile('public/HTML/index.html', {root: __dirname })
 });
 
-var desiredTemp = 50;
-var curr_temp = 80;
+
+
 io.on('connection', function(socket){
 	socket.on('getCombinations', function()
 	{
@@ -65,31 +68,19 @@ io.on('connection', function(socket){
 	{
 		socket.emit("tanks", db.get_tanks());
 	});
-	socket.on('setTemperature', function(degrees)
+	socket.on('setTemperature', function(new_temp)
 	{
-		desiredTemp = degrees;
+		temp.set_temp(new_temp);
 	});
 	socket.on('getDesiredTemp', function()
 	{
-
-		socket.emit("desiredTempReturn", desiredTemp);
-
-	});
-	socket.on('getDesiredTemp', function()
-	{
-
-		socket.emit("desiredTempReturn", desiredTemp);
+		socket.emit("desiredTempReturn", temp.get_desired_temp());
 
 	});
+
 	socket.on('getTemp', function()
 	{
-		// sensor.read(11 , 26, function(err, temperature, humidity) {
-		//     if (!err) {
-		//         console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
-		// 		socket.emit("tempReturn", temperature.toFixed(1) );
-		//     }
-		// });
-		socket.emit("tempReturn", 30);
+		socket.emit("tempReturn", temp.get_current_temp());
 		
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
