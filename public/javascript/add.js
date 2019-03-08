@@ -32,6 +32,30 @@ function addDrinkProcedure()
             /* Function refills HTML elements based on contents of ingredients[] */
             $("#popupContainer").load('HTML/add.html', function()
             {
+                function checkInputParams(name, ingredients)
+                {
+                    if (name.length > 20)
+                    {
+                        console.log("Name bust be less than 20 chars");// eventually alert
+                        return false;
+                    }
+                    if (name.length <= 0)
+                    {
+                        console.log("Mixture must have name");// eventually alert
+                        return false;
+                    }
+
+                    for (var index = 0; index < ingredients.length; index++)
+                    {
+                        if (ingredients[index].parts <= 0)
+                        {
+                            console.log("Can't have an ingredient with 0 parts");// eventually alert
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
                 function rebuildIngredeints()
                 {
                     /* Build HTML for array */
@@ -144,15 +168,18 @@ function addDrinkProcedure()
                 var completeButton = document.getElementById("drinkAdditionCompleteButton");
                 completeButton.onclick = function()
                 {
-                    /* Make drink object and send it to the server */
-                    var drink = {};
-                    drink.name = document.getElementById("drinkNameText").value;
-                    drink.ingredients = ingredients;
-                    /* We need some promise type stuff here... */
-                    socket.emit("newCombination", drink)
-                    //resolve("Stuff worked!");
-                    /* Call exit... it clears everything */
-                    exitButton.click();
+                    if (checkInputParams(document.getElementById("drinkNameText").value, ingredients))
+                    {
+                        /* Make drink object and send it to the server */
+                        var drink = {};
+                        drink.name = document.getElementById("drinkNameText").value;
+                        drink.ingredients = ingredients;
+                        /* We need some promise type stuff here... */
+                        socket.emit("newCombination", drink)
+                        //resolve("Stuff worked!");
+                        /* Call exit... it clears everything */
+                        exitButton.click();
+                    }
                 }
             })
 			

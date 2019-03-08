@@ -37,28 +37,6 @@ app.get('/', function(req, res){
   res.sendFile('public/HTML/index.html', {root: __dirname })
 });
 
-
-//let on = false;
-
-// var update_file = function(file, data)
-// {
-// 	let text = Jdb.add_combo();SON.stringify(data);
-// 	fs.writeFileSync(file, text);
-// }
-
-//Database.update_file()
-
-// var read_file = function(file)
-// {
-// 	let rawdata = fs.readFileSync(file);  
-//   	return JSON.parse(rawdata);  
-// }
-
-//var tankArray = read_file('tanks.json');
-
-//var drinkComboObjects = read_file('drinks.json');
-//var cur_num_combinations = drinkComboObjects.length;
-
 var desiredTemp = 50;
 var curr_temp = 80;
 io.on('connection', function(socket){
