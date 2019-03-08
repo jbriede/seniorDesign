@@ -67,6 +67,21 @@ var loadCombinations = function()
 						{
 							dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].parts + " parts "+ tanks[drink.ingredients[ingredientIndex].tankId].name + "</div>"
 						}
+
+						function waitAndClose()
+						{
+							smallPopupContainer.style.display = "block";
+							buttonBlocker.style.display = "block";
+							$("#smallPopupContainer").load('HTML/waiting.html', function()
+							{
+								setTimeout(function(){ 
+									dispenseExitButton.click();
+									smallPopupContainer.style.display = "none";
+									buttonBlocker.style.display = "none";
+								}, 5000);
+							})
+						}
+
 						/* Set up buttons */
 						dispense6.onclick = function()
 						{
@@ -74,6 +89,7 @@ var loadCombinations = function()
 							dispenseObj.id = id;
 							dispenseObj.ml = 6 * 29.5735; // convert to mL
 							socket.emit("dispenseCombination", dispenseObj);
+							waitAndClose();
 						}
 						dispense8.onclick = function()
 						{
@@ -81,6 +97,7 @@ var loadCombinations = function()
 							dispenseObj.id = id;
 							dispenseObj.ml = 8 * 29.5735; // convert to mL
 							socket.emit("dispenseCombination", dispenseObj);
+							waitAndClose();
 						}
 						dispense10.onclick = function()
 						{
@@ -88,6 +105,7 @@ var loadCombinations = function()
 							dispenseObj.id = id;
 							dispenseObj.ml = 10 * 29.5735; // convert to mL
 							socket.emit("dispenseCombination", dispenseObj);
+							waitAndClose();
 						}
 						dispense12.onclick = function()
 						{
@@ -95,6 +113,7 @@ var loadCombinations = function()
 							dispenseObj.id = id;
 							dispenseObj.ml = 12 * 29.5735; // convert to mL
 							socket.emit("dispenseCombination", dispenseObj);
+							waitAndClose();
 						}
 						dispenseExitButton.onclick = function()
 						{
