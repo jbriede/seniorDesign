@@ -1,10 +1,22 @@
 #tankOptions
 {
     display: none;
+    font-size: 30px;
+    padding: 20px;
 }
 .configItem
 {
 	margin: 10px 5px;
     background-color: #99c3ec;
     padding: 12px;
+}
+
+#tankOptions input{
+    font-size: 24px; 
+    margin-top: 20px;
+}
+
+#tankOptions select{
+    margin-top: 30px;
+    font-size: 31px;
 }

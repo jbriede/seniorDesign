@@ -39,6 +39,7 @@ var loadCombinations = function()
 				document.getElementById("combination-" + combinations[i].id).onclick = function()
 				{
 					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+					buttonBlocker.style.display = "block";
 					$("#popupContainer").load('HTML/dispense.html', function()
 					{
 						var dispensePopup = document.getElementById("dispensePopup");
@@ -118,6 +119,7 @@ var loadCombinations = function()
 						dispenseExitButton.onclick = function()
 						{
 							popupContainer.style.display = "none";
+							buttonBlocker.style.display = "none";
 						}
 	
 					});
