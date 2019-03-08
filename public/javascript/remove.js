@@ -50,7 +50,8 @@ function setupRemoveListeners()
         deleteDrinkProcedure().then(function(result) 
         {
             /* Once the new drink has been sent to the server, the promise will resolve */
-            loadCombinations();
+            setTimeout(function(){ loadCombinations(); }, 1000);
+            
         }, function(err) 
         {
         console.log(err); // Error: "It broke"

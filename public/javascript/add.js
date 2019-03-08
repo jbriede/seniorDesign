@@ -14,6 +14,9 @@ var parts_inc_dec_size = 1;
 
 var ingredientsContainer = document.getElementById("ingredientContainer");
 
+
+
+
 /* Call back function for add button */
 function addDrinkProcedure()
 {
@@ -24,7 +27,8 @@ function addDrinkProcedure()
 		getTanks(socket).then(function(tankArray)
 		{
             /* Initialize to 0 ingredeints */
-			var ingredients = [];
+            var ingredients = [];
+            var num_ingredients = 0;
             /* Function refills HTML elements based on contents of ingredients[] */
             $("#popupContainer").load('HTML/add.html', function()
             {
@@ -65,6 +69,7 @@ function addDrinkProcedure()
                                 }
                             }
                             ingredients = ingredients2;
+                            num_ingredients -=1;
                             rebuildIngredeints();
                         }
                         /* Plus Listener */
@@ -107,10 +112,18 @@ function addDrinkProcedure()
                 /* Listener for 'add ingredent' button */
                 addIngredientButton.onclick = function()
                 {
-                    /* By default use whatever is in first tank */
-                    ingredients.push({"tankId": 0, "parts": 0});
-                    /* Now redraw to update html */
-                    rebuildIngredeints();
+                    if (num_ingredients < tankArray.length)
+                    {
+                        /* By default use whatever is in first tank */
+                        ingredients.push({"tankId": 0, "parts": 0});
+                        /* Now redraw to update html */
+                        rebuildIngredeints();
+                        num_ingredients +=1;
+                    }
+                    else
+                    {
+                        alert("can't have more than " + tankArray.length + " ingredients");
+                    }
                 }
 
                 /* WHen initially loading the ingredients window add 1 element */

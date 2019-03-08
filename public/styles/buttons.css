@@ -40,7 +40,7 @@
 
 .minusButton
 {
-	margin-right: 20px;
+	margin-right: 10px;
     background: #659ce0;
     padding: 5px 14px 7px 16px;
     border-radius: 18px;
@@ -48,7 +48,7 @@
 }
 .plusButton
 {
-	margin-right: 30px;
+	margin-right: 20px;
     background: #669ddf;
     padding: 5px 14px 7px 13px;
    	border-radius: 18px;
