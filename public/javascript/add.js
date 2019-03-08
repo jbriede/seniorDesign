@@ -36,12 +36,12 @@ function addDrinkProcedure()
                 {
                     if (name.length > 20)
                     {
-                        console.log("Name bust be less than 20 chars");// eventually alert
+                        reportIssue("Name bust be less than 20 chars");
                         return false;
                     }
                     if (name.length <= 0)
                     {
-                        console.log("Mixture must have name");// eventually alert
+                        reportIssue("Mixture must have name");
                         return false;
                     }
 
@@ -49,7 +49,7 @@ function addDrinkProcedure()
                     {
                         if (ingredients[index].parts <= 0)
                         {
-                            console.log("Can't have an ingredient with 0 parts");// eventually alert
+                            reportIssue("Can't have an ingredient with 0 parts");
                             return false;
                         }
                     }
@@ -146,7 +146,7 @@ function addDrinkProcedure()
                     }
                     else
                     {
-                        alert("can't have more than " + tankArray.length + " ingredients");
+                        reportIssue("More than " + tankArray.length + " ingredients not allowed.");
                     }
                 }
 

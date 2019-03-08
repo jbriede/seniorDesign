@@ -6,6 +6,7 @@ var socket = io();
 
 var popupContainer = document.getElementById("popupContainer");
 var smallPopupContainer = document.getElementById("smallPopupContainer");
+var buttonBlocker = document.getElementById("buttonBlocker");
 
 var start = function()
 {

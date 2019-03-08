@@ -1,9 +1,16 @@
 #smallPopupContainer
 {
     position: absolute;
-    z-index: 50;
-    top: 173px;
-    left: 204px;
-    padding: 10px;
+    z-index: 51;
+    top: 159px;
+    left: 172px;
+    padding: 25px;
     background-color: #68a0e0;
+    border-radius: 10px;
+    width: 445px;
+}
+.smallPopupText
+{
+    margin-bottom: 10px;
+    text-align: center;
 }

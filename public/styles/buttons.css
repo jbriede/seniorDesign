@@ -13,6 +13,12 @@
     background-color: #f6422e;
 }
 
+.PopupBottomButtons.center
+{
+    float: left;
+    margin-left: 156px;
+}
+
 .menuButton
 {
 	display: block;
