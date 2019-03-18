@@ -53,6 +53,11 @@ class Database {
   {
     return this.combos;
   }
+
+  refill_tank(tank, amount)
+  {
+    this.tanks[tank].ml = amount
+  }
   updateFile()
   {
   	let data = JSON.stringify(this.combos);  
