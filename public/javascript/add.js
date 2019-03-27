@@ -68,10 +68,7 @@ function addDrinkProcedure()
                         /* For each ingredeint in tank, make an option in the selector */
                         for (var index = 0; index < tankArray.length; index++)
                         {
-                            if (tankArray[index].available)
-                            {
-                                optionString += "<option value=" + tankArray[index].id + ">" + tankArray[index].name + "</option>"
-                            }
+                            optionString += "<option value=" + tankArray[index].id + ">" + tankArray[index].name + "</option>"
                             
                         }
                         /* Long important line of html here */
@@ -140,15 +137,7 @@ function addDrinkProcedure()
                 /* Listener for 'add ingredent' button */
                 addIngredientButton.onclick = function()
                 {
-                    var num_available = 0;
-                    for (var i = 0; i < tankArray.length; i++)
-                    {
-                        if (tankArray[i].available)
-                        {
-                            num_available++;
-                        }
-                    }
-                    if (num_ingredients < num_available)
+                    if (num_ingredients < tankArray.length)
                     {
                         /* By default use whatever is in first tank */
                         ingredients.push({"tankId": 0, "parts": 0});
@@ -158,7 +147,7 @@ function addDrinkProcedure()
                     }
                     else
                     {
-                        reportIssue("More than " + num_available + " ingredients not allowed.");
+                        reportIssue("More than " + tankArray.length + " ingredients not allowed.");
                     }
                 }
 

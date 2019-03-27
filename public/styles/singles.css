@@ -9,3 +9,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 text-align: center;
 
 }
+
+.unavailable
+{
+	background-color: grey;
+}

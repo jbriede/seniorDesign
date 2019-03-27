@@ -29,6 +29,10 @@ var loadSingles = function()
 			{
 				tanksDiv.innerHTML += "<button class=\"singlesButton\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
 			}
+			else
+			{
+				tanksDiv.innerHTML += "<button class=\"singlesButton unavailable\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
+			}
 		}
 		for (var tanksIndex = 0; tanksIndex < tanks.length; tanksIndex++)        
         {
