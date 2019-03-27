@@ -4,8 +4,18 @@ class Dispenser {
     constructor(db) 
     {
        this.db = db;
-       this.ml_per_second = 50
+       this.ml_per_second = 1;
        
+    }
+
+    dispense_single_drink(tankId)
+    {
+        console.log("dispense " + tankId);
+        this.dispense_start = Date.now(); //grab time when dispense starts
+        console.log("dispense start: ", this.dispense_start);
+		var tanks = this.db.get_tanks();
+		var pin = tanks[tankId].pin;
+		this.turnon(pin);
     }
    
     dispense_combo(drink_id, ml)
@@ -28,6 +38,7 @@ class Dispenser {
 
             var ratio = drink.ingredients[i].parts/total_parts;
             var ml_ratio = ratio*ml;
+            this.db.update_tank_level(tank_id, ml);
             var seconds = ml_ratio / this.ml_per_second;
             console.log("   drink ", tankArray[tank_id].name, " seconds ", seconds);
 
@@ -37,6 +48,21 @@ class Dispenser {
 
         }
 
+    }
+
+    stop_dispense(tankId)
+    {
+        console.log("Stop dispensing");
+		var tankArray = this.db.get_tanks();
+
+        var pin = tankArray[tankId].pin;
+        this.turnoff2(pin);
+        var time_dispense = Date.now() - this.dispense_start;
+        var ml_dispensed = time_dispense*this.ml_per_second/1000;
+        console.log("dispense end: ",Date.now(), " \namount dispensed: ", ml_dispensed);
+        this.db.update_tank_level(tankId, ml_dispensed)
+        //console.log("turnoff pin ", pin);
+    
     }
 
 
@@ -61,6 +87,21 @@ class Dispenser {
     	// 	console.log(err)
     	// })
     }
+
+
+    turnoff2(pin)
+{
+	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	// {
+	// 	console.log("off", pin);
+	// 	return gpio.write(pin, false)
+	// }).catch((err) => {
+	// 	console.log("CANT USE PIN", pin)
+	// 	console.log(err)
+	// })
+}
+    
+
     
 
 

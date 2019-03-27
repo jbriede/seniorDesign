@@ -58,6 +58,12 @@ class Database {
   {
     this.tanks[tank].ml = amount
   }
+
+  update_tank_level(i, ml_dispensed)
+  {
+    this.tanks[i].ml = this.tanks[i].ml - ml_dispensed;
+    this.updateFile();
+  }
   updateFile()
   {
   	let data = JSON.stringify(this.combos);  
