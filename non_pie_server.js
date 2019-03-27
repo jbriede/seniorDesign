@@ -10,6 +10,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fs = require('fs');
+
 //var Database = require('database.js');
 // var sensor = require('node-dht-sensor');
 
@@ -25,14 +26,6 @@ var temp = new TemperatureRegulator();
 
 const Dispenser = require('./dispenser.js');
 var dispense = new Dispenser(db);
-
-
-
-
-// var sensor = require('node-dht-sensor');
-
-//  var gpio = require('rpi-gpio');
-//  var gpiop = gpio.promise;
 
 app.use(express.static('public'))
 
@@ -85,29 +78,11 @@ io.on('connection', function(socket){
 		
 	});
 	socket.on('dispenseSingleDrink', function(tankId){
-		console.log("dispense " + tankId);
-		var tanks = db.get_tanks();
-		var pin = tanks[tankId].pin;
-		turnon(pin);
+		dispense.dispense_single_drink(tankId);
 	});
-	socket.on('stopDispense', function(){
-		console.log("Stop dispensing");
-		var tankArray = db.get_tanks;
-		for (var i = 0; i < tankArray.length; i++)
-		{
-			var pin = tankArray[i].pin;
-			turnoff2(pin);
-			console.log("turnoff pin ", pin);
-		}
-		
-
+	socket.on('stopDispense', function(tankId){
+		dispense.stop_dispense(tankId);
 	});
-
-	// dispenseObj 
-	// {
-	// 	drinkid: 2,
-	// 	mL: 200
-	// }
 
 
 	socket.on('dispenseCombination', function(dispenseObj){ 
@@ -121,49 +96,4 @@ http.listen(3000, function(){
   console.log('listening on *:3000 hello');
 
 });
-
-
-
-
-
-function turnoff()
-{
-	// gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	console.log("off", this.pin);
-	// 	return gpio.write(this.pin, false)
-	// }).catch((err) => {
-	// 	console.log("CANT USE PIN", this.pin)
-	// 	console.log(err)
-	// })
-}
-function turnoff2(pin)
-{
-	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	console.log("off", pin);
-	// 	return gpio.write(pin, false)
-	// }).catch((err) => {
-	// 	console.log("CANT USE PIN", pin)
-	// 	console.log(err)
-	// })
-}
-
-function turnon(pin)
-{
-	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	return gpio.write(pin, true)
-	// }).catch((err) => {
-	// 	console.log(err)
-	// })
-}
-    
-
-
-
-// var GUI = require('./GUIBackend');
-//var DB = require('./database');
-
-// var databse = new DB.database("");
 

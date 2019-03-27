@@ -37,7 +37,8 @@ var loadSingles = function()
 			}
 			dispenseButton.onmouseup = function()
 			{
-				socket.emit("stopDispense");
+				var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+				socket.emit("stopDispense", id);
 			}
         }
     }, function(err) 
