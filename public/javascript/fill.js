@@ -66,7 +66,7 @@ function fillProcedureInternal()
 
                             newTankParams.aprox_mL = 500;
                             var fillSelection = parseInt(defaultFillOptions.value.substr(defaultFillOptions.value.lastIndexOf('-')+1, defaultFillOptions.value.length));
-                            if (fillSelection == 1)
+                            if (fillSelection == 0)
                             {
                                 newTankParams.aprox_mL = 1000;
                             }
@@ -86,7 +86,7 @@ function fillProcedureInternal()
                             var newLiquidCheckbox = document.getElementById("newLiquidCheckbox");
                             newTankParams.new = newLiquidCheckbox.checked;
                             newTankParams.id = id;
-                            socket.emit("newTankParams", newTankParams);
+                            socket.emit("refillContainer", newTankParams);
                         }   
 
                     };

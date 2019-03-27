@@ -55,8 +55,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('refillContainer', function(refilObject)
 	{
-	//	db.refill_tank(tank, amount)
-
+		db.refill_tank(refilObject);
 	});
 	socket.on('getTanks', function()
 	{

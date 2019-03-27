@@ -4,7 +4,7 @@ class Dispenser {
     constructor(db) 
     {
        this.db = db;
-       this.ml_per_second = 1;
+       this.ml_per_second = 20;
        
     }
 
