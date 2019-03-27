@@ -69,6 +69,7 @@ function addDrinkProcedure()
                         for (var index = 0; index < tankArray.length; index++)
                         {
                             optionString += "<option value=" + tankArray[index].id + ">" + tankArray[index].name + "</option>"
+                            
                         }
                         /* Long important line of html here */
                         ingredientContainer.innerHTML += "<div class=\"ingredientItem\" id=\"ingredientItem-" + ingredientsIndex +"\"><select id=\"selector-" + ingredientsIndex + "\">" + optionString + "</select><span class=\"minusButton\" id=\"minus-" + ingredientsIndex + "\">-</span><span class=\"quantity\" id=\"quantity-" + ingredientsIndex + "\">" + ingredients[ingredientsIndex].parts.toFixed(1) + " parts</span><span class=\"plusButton\" id=\"plus-" + ingredientsIndex + "\">+</span><span class=\"deleteButton\" id=\"delete-" + ingredientsIndex + "\">Delete</span></div>";

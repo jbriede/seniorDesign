@@ -14,3 +14,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=0 );
     height: 380px;
 }
+#combinations > div.unavailable
+{
+	background-color: grey;
+}

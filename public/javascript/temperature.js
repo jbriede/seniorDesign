@@ -32,6 +32,7 @@ function tempSetProcedure()
 {
 
 	popupContainer.style.display = "block";
+	buttonBlocker.style.display = "block";
 
 	/* Initialize to 0 ingredeints */
 	var ingredients = [];
@@ -54,19 +55,20 @@ function tempSetProcedure()
 				{
 					var temp = Number(desiredTemp.innerHTML);
 					temp -=1;
+					desiredTemp.innerHTML = String(temp);
 					socket.emit("setTemperature", temp);
-					tempSetProcedure(socket);
 				}
 				plusButton.onclick = function()
 				{
 					var temp = Number(desiredTemp.innerHTML);
 					temp +=1;
+					desiredTemp.innerHTML = String(temp);
 					socket.emit("setTemperature", temp);
-					tempSetProcedure(socket);
 				}
 				setTempExitButton.onclick = function()
 				{
 					popupContainer.style.display = "none";
+					buttonBlocker.style.display = "none";
 				}
 
 

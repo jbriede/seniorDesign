@@ -31,77 +31,125 @@ var loadCombinations = function()
 			/* Build the HTML */
 			for (var i = 0; i < combinations.length; i++)
 			{
-				combinationsContainer.innerHTML += "<div id =\"combination-" + combinations[i].id + "\">" + combinations[i].name  + "</div>";
+				var componentsAvailable = true;
+				for (var ingredientIndex = 0; ingredientIndex < combinations[i].ingredients.length; ingredientIndex+=1)
+				{
+					if (!tanks[combinations[i].ingredients[ingredientIndex].tankId].available)
+					{
+						componentsAvailable = false;
+					}
+				}
+				if (componentsAvailable)
+				{
+					combinationsContainer.innerHTML += "<div id=\"combination-" + combinations[i].id + "\">" + combinations[i].name  + "</div>";
+				}
+				else
+				{
+					combinationsContainer.innerHTML += "<div class=\"unavailable\" id=\"combination-" + combinations[i].id + "\">" + combinations[i].name  + "</div>";
+				}
+				
 			}
 			/* Set up the on click listeners */
 			for (var i = 0; i < combinations.length; i++)
 			{
-				document.getElementById("combination-" + combinations[i].id).onclick = function()
+				var componentsAvailable = true;
+				for (var ingredientIndex = 0; ingredientIndex < combinations[i].ingredients.length; ingredientIndex+=1)
 				{
-					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
-					$("#popupContainer").load('HTML/dispense.html', function()
+					if (!tanks[combinations[i].ingredients[ingredientIndex].tankId].available)
 					{
-						var dispensePopup = document.getElementById("dispensePopup");
-						var dispenseIngredients = document.getElementById("dispenseIngredients");
-						var dispense6 = document.getElementById("dispenseButton_6");
-						var dispense8 = document.getElementById("dispenseButton_8");
-						var dispense10 = document.getElementById("dispenseButton_10");
-						var dispense12 = document.getElementById("dispenseButton_12");
-						var dispenseExitButton = document.getElementById("dispenseExitButton");
-						var dispenseTitle = document.getElementById("mediumPopupTitle");
-						popupContainer.style.display = "block";
-						var drink = {};
-						/* So the drink ids dont line up with their array indices */
-						for (var i = 0; i < combinations.length; i+=1)
+						componentsAvailable = false;
+					}
+				}
+				if (componentsAvailable)
+				{
+					document.getElementById("combination-" + combinations[i].id).onclick = function()
+					{
+						var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+						buttonBlocker.style.display = "block";
+						$("#popupContainer").load('HTML/dispense.html', function()
 						{
-							if (combinations[i].id == id)
+							var dispensePopup = document.getElementById("dispensePopup");
+							var dispenseIngredients = document.getElementById("dispenseIngredients");
+							var dispense6 = document.getElementById("dispenseButton_6");
+							var dispense8 = document.getElementById("dispenseButton_8");
+							var dispense10 = document.getElementById("dispenseButton_10");
+							var dispense12 = document.getElementById("dispenseButton_12");
+							var dispenseExitButton = document.getElementById("dispenseExitButton");
+							var dispenseTitle = document.getElementById("mediumPopupTitle");
+							popupContainer.style.display = "block";
+							var drink = {};
+							/* So the drink ids dont line up with their array indices */
+							for (var i = 0; i < combinations.length; i+=1)
 							{
-								drink = combinations[i];
-								break;
+								if (combinations[i].id == id)
+								{
+									drink = combinations[i];
+									break;
+								}
 							}
-						}
-						/* input name */
-						dispenseTitle.innerHTML = drink.name;
-						/* input ingredients */
-						for (var ingredientIndex = 0; ingredientIndex < drink.ingredients.length; ingredientIndex+=1)
-						{
-							dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].parts + " parts "+ tanks[drink.ingredients[ingredientIndex].tankId].name + "</div>"
-						}
-						/* Set up buttons */
-						dispense6.onclick = function()
-						{
-							var dispenseObj = {}
-							dispenseObj.id = id;
-							dispenseObj.ml = 6 * 29.5735; // convert to mL
-							socket.emit("dispenseCombination", dispenseObj);
-						}
-						dispense8.onclick = function()
-						{
-							var dispenseObj = {}
-							dispenseObj.id = id;
-							dispenseObj.ml = 8 * 29.5735; // convert to mL
-							socket.emit("dispenseCombination", dispenseObj);
-						}
-						dispense10.onclick = function()
-						{
-							var dispenseObj = {}
-							dispenseObj.id = id;
-							dispenseObj.ml = 10 * 29.5735; // convert to mL
-							socket.emit("dispenseCombination", dispenseObj);
-						}
-						dispense12.onclick = function()
-						{
-							var dispenseObj = {}
-							dispenseObj.id = id;
-							dispenseObj.ml = 12 * 29.5735; // convert to mL
-							socket.emit("dispenseCombination", dispenseObj);
-						}
-						dispenseExitButton.onclick = function()
-						{
-							popupContainer.style.display = "none";
-						}
-	
-					});
+							/* input name */
+							dispenseTitle.innerHTML = drink.name;
+							/* input ingredients */
+							for (var ingredientIndex = 0; ingredientIndex < drink.ingredients.length; ingredientIndex+=1)
+							{
+								dispenseIngredients.innerHTML += "<div class=\"dispenseIngredientsItem\">" + drink.ingredients[ingredientIndex].parts + " parts "+ tanks[drink.ingredients[ingredientIndex].tankId].name + "</div>"
+							}
+
+							function waitAndClose()
+							{
+								smallPopupContainer.style.display = "block";
+								buttonBlocker.style.display = "block";
+								$("#smallPopupContainer").load('HTML/waiting.html', function()
+								{
+									setTimeout(function(){ 
+										dispenseExitButton.click();
+										smallPopupContainer.style.display = "none";
+										buttonBlocker.style.display = "none";
+									}, 5000);
+								})
+							}
+
+							/* Set up buttons */
+							dispense6.onclick = function()
+							{
+								var dispenseObj = {}
+								dispenseObj.id = id;
+								dispenseObj.ml = 6 * 29.5735; // convert to mL
+								socket.emit("dispenseCombination", dispenseObj);
+								waitAndClose();
+							}
+							dispense8.onclick = function()
+							{
+								var dispenseObj = {}
+								dispenseObj.id = id;
+								dispenseObj.ml = 8 * 29.5735; // convert to mL
+								socket.emit("dispenseCombination", dispenseObj);
+								waitAndClose();
+							}
+							dispense10.onclick = function()
+							{
+								var dispenseObj = {}
+								dispenseObj.id = id;
+								dispenseObj.ml = 10 * 29.5735; // convert to mL
+								socket.emit("dispenseCombination", dispenseObj);
+								waitAndClose();
+							}
+							dispense12.onclick = function()
+							{
+								var dispenseObj = {}
+								dispenseObj.id = id;
+								dispenseObj.ml = 12 * 29.5735; // convert to mL
+								socket.emit("dispenseCombination", dispenseObj);
+								waitAndClose();
+							}
+							dispenseExitButton.onclick = function()
+							{
+								popupContainer.style.display = "none";
+								buttonBlocker.style.display = "none";
+							}
+		
+						});
+					}
 				}
 	
 			}

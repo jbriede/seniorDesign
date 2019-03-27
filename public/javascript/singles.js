@@ -25,20 +25,30 @@ var loadSingles = function()
         tanksDiv.innerHTML = "";
         for (var tanksIndex = 0; tanksIndex < tanks.length; tanksIndex++)        
         {
-            tanksDiv.innerHTML += "<button class=\"singlesButton\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
+			if (tanks[tanksIndex].available)
+			{
+				tanksDiv.innerHTML += "<button class=\"singlesButton\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
+			}
+			else
+			{
+				tanksDiv.innerHTML += "<button class=\"singlesButton unavailable\" id=\"dispenseButton-" + tanksIndex + "\">" + tanks[tanksIndex].name + "</button>";
+			}
 		}
 		for (var tanksIndex = 0; tanksIndex < tanks.length; tanksIndex++)        
         {
-			var dispenseButton = document.getElementById("dispenseButton-" + tanksIndex);
-			dispenseButton.onmousedown = function()
+			if (tanks[tanksIndex].available)
 			{
-				var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
-				socket.emit("dispenseSingleDrink", id);
-			}
-			dispenseButton.onmouseup = function()
-			{
-				var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
-				socket.emit("stopDispense", id);
+				var dispenseButton = document.getElementById("dispenseButton-" + tanksIndex);
+				dispenseButton.onmousedown = function()
+				{
+					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+					socket.emit("dispenseSingleDrink", id);
+				}
+				dispenseButton.onmouseup = function()
+				{
+					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+					socket.emit("stopDispense", id);
+				}
 			}
         }
     }, function(err) 
