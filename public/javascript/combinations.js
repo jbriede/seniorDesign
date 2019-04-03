@@ -70,7 +70,7 @@ var loadCombinations = function()
 						{
 							var dispensePopup = document.getElementById("dispensePopup");
 							var dispenseIngredients = document.getElementById("dispenseIngredients");
-							var dispense6 = document.getElementById("dispenseButton_6");
+							var dispense4 = document.getElementById("dispenseButton_4");
 							var dispense8 = document.getElementById("dispenseButton_8");
 							var dispense10 = document.getElementById("dispenseButton_10");
 							var dispense12 = document.getElementById("dispenseButton_12");
@@ -99,6 +99,8 @@ var loadCombinations = function()
 							{
 								smallPopupContainer.style.display = "block";
 								buttonBlocker.style.display = "block";
+								loadSingles();
+								loadCombinations();
 								$("#smallPopupContainer").load('HTML/waiting.html', function()
 								{
 									setTimeout(function(){ 
@@ -110,11 +112,11 @@ var loadCombinations = function()
 							}
 
 							/* Set up buttons */
-							dispense6.onclick = function()
+							dispense4.onclick = function()
 							{
 								var dispenseObj = {}
 								dispenseObj.id = id;
-								dispenseObj.ml = 6 * 29.5735; // convert to mL
+								dispenseObj.ml = 4 * 29.5735; // convert to mL
 								socket.emit("dispenseCombination", dispenseObj);
 								waitAndClose();
 							}
