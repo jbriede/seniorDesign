@@ -1,4 +1,6 @@
 const fs = require('fs');
+var gpio = require('rpi-gpio');
+var gpiop = gpio.promise;
 
 class TemperatureRegulator {
   constructor() {
@@ -36,20 +38,22 @@ class TemperatureRegulator {
     this.desired_temp = new_temp;
     console.log("new temp is: ", this.desired_temp)
     let temp = JSON.stringify(this.desired_temp);  
-  	fs.writeFileSync('temp.json', temp);
+    fs.writeFileSync('temp.json', temp);
+    this.regulate_temp();
   }
   regulate_temp()
   {
     //loop to ensure temp is desired temp
 
     this.get_current_temp();
-    if (this.desired_temp > this.current_temp)
+    if (this.desired_temp < this.current_temp)
     {
       if (this.peltier_status == false) //is peltier disabled? Enable. Else, do nothing
       {
         console.log("\nenable peltier") //enable peltier
         this.peltier_status = true;
-        //turnoff2(pin)
+        this.turnon(22);
+        this.turnon(12);
       }
     }
     else
@@ -58,7 +62,8 @@ class TemperatureRegulator {
       {
         console.log("\nDisable Peltier") //disable peltier
         this.peltier_status = false;
-        //turnon(pin); //update with pin
+        this.turnoff2(22); //update with pin
+        this.turnoff2(12); //update with pin
       }
     }
 
@@ -67,24 +72,24 @@ class TemperatureRegulator {
 
   turnoff2(pin)
   {
-    // gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-    // {
-    // 	console.log("off", pin);
-    // 	return gpio.write(pin, false)
-    // }).catch((err) => {
-    // 	console.log("CANT USE PIN", pin)
-    // 	console.log(err)
-    // })
+    gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+    {
+    	console.log("off", pin);
+    	return gpio.write(pin, false)
+    }).catch((err) => {
+    	console.log("CANT USE PIN", pin)
+    	console.log(err)
+    })
   }
 
   turnon(pin)
 {
-	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	return gpio.write(pin, true)
-	// }).catch((err) => {
-	// 	console.log(err)
-	// })
+	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	{
+		return gpio.write(pin, true)
+	}).catch((err) => {
+		console.log(err)
+	})
 }
 
 

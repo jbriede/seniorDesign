@@ -14,14 +14,13 @@ const fs = require('fs');
 //var Database = require('database.js');
 // var sensor = require('node-dht-sensor');
 
-//  var gpio = require('rpi-gpio');
-//  var gpiop = gpio.promise;
+
 
 const Database = require('./database.js');
-const TemperatureRegulator = require('./temperatureRegulator.js');
+//const TemperatureRegulator = require('./temperatureRegulator.js');
 
 var db = new Database();
-var temp = new TemperatureRegulator();
+//var temp = new TemperatureRegulator();
 
 
 const Dispenser = require('./dispenser.js');
@@ -55,8 +54,7 @@ io.on('connection', function(socket){
 	});
 	socket.on('refillContainer', function(refilObject)
 	{
-	//	db.refill_tank(tank, amount)
-
+		db.refill_tank(refilObject);
 	});
 	socket.on('getTanks', function()
 	{

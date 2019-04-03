@@ -54,16 +54,27 @@ class Database {
     return this.combos;
   }
 
-  refill_tank(tank, amount)
+  refill_tank(refillObject)
   {
-    this.tanks[tank].ml = amount
+    var tank_id = refillObject.id;
+    this.tanks[tank_id].ml = refillObject.aprox_mL;
+    this.tanks[tank_id].name = refillObject.name;
+    this.tanks[tank_id].available = true; 
+    //if refillObject.new == true, delete all drinks with old drink
+    this.updateFile();
   }
 
   update_tank_level(i, ml_dispensed)
   {
     this.tanks[i].ml = this.tanks[i].ml - ml_dispensed;
+    if (this.tanks[i].ml < 0)
+    {
+      this.tanks[i].available = false;
+    }
+
     this.updateFile();
   }
+
   updateFile()
   {
   	let data = JSON.stringify(this.combos);  

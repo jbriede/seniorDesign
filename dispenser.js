@@ -1,10 +1,11 @@
-
+ var gpio = require('rpi-gpio');
+ var gpiop = gpio.promise;
 
 class Dispenser {
     constructor(db) 
     {
        this.db = db;
-       this.ml_per_second = 1;
+       this.ml_per_second = 20;
        
     }
 
@@ -68,37 +69,37 @@ class Dispenser {
 
     turnoff()
     {
-        // gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
-        // {
-        // 	console.log("off", this.pin);
-        // 	return gpio.write(this.pin, false)
-        // }).catch((err) => {
-        // 	console.log("CANT USE PIN", this.pin)
-        // 	console.log(err)
-        // })
+        gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
+        {
+        	console.log("off", this.pin);
+        	return gpio.write(this.pin, false)
+        }).catch((err) => {
+        	console.log("CANT USE PIN", this.pin)
+        	console.log(err)
+        })
     }
 
     turnon(pin)
     {
-    	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-    	// {
-    	// 	return gpio.write(pin, true)
-    	// }).catch((err) => {
-    	// 	console.log(err)
-    	// })
+    	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+    	{
+    		return gpio.write(pin, true)
+    	}).catch((err) => {
+    		console.log(err)
+    	})
     }
 
 
     turnoff2(pin)
 {
-	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	console.log("off", pin);
-	// 	return gpio.write(pin, false)
-	// }).catch((err) => {
-	// 	console.log("CANT USE PIN", pin)
-	// 	console.log(err)
-	// })
+	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	{
+		console.log("off", pin);
+		return gpio.write(pin, false)
+	}).catch((err) => {
+		console.log("CANT USE PIN", pin)
+		console.log(err)
+	})
 }
     
 
