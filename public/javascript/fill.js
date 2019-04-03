@@ -62,7 +62,6 @@ function fillProcedureInternal()
                         {
                             var newTankParams = {};
                             newTankParams.name = tankNameText.value;
-                            newTankParams.pin = tanks[id].pin;
 
                             newTankParams.aprox_mL = 500;
                             var fillSelection = parseInt(defaultFillOptions.value.substr(defaultFillOptions.value.lastIndexOf('-')+1, defaultFillOptions.value.length));
