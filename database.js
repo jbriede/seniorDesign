@@ -45,6 +45,35 @@ class Database {
 		this.combos = drinkComboObjects2;
     this.updateFile();
   }
+
+  deleteCombosWithId(changedTankId)
+  {
+    var combosToDelete = [];
+    for (var comboIndex = 0; comboIndex < this.combos.length; comboIndex++)
+    {
+      var combo = this.combos[comboIndex];
+      for (var ingredientIndex = 0; ingredientIndex < combo.ingredients.length; ingredientIndex++)
+      {
+        var ingredient = combo.ingredients[ingredientIndex];
+        if (ingredient.tankId == changedTankId)
+        {
+          // Delete this combo we don't have this ingredeint any more
+          combosToDelete.push(combo.id);
+          break;
+          
+        }
+      }
+    }
+
+    var context = this;
+
+    combosToDelete.forEach(function(comboId)
+    {
+      context.delete_combo(comboId);
+    });
+
+  }
+
   get_tanks()
   {
   	return this.tanks;
@@ -60,7 +89,10 @@ class Database {
     this.tanks[tank_id].ml = refillObject.aprox_mL;
     this.tanks[tank_id].name = refillObject.name;
     this.tanks[tank_id].available = true; 
-    //if refillObject.new == true, delete all drinks with old drink
+    if (refillObject.new)
+    {
+      this.deleteCombosWithId(tank_id);
+    }
     this.updateFile();
   }
 

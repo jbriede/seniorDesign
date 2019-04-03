@@ -75,7 +75,7 @@ function fillProcedureInternal()
                             }
                             else if (fillSelection == 2)
                             {
-                                newTankParams.aprox_mL = 1500;
+                                newTankParams.aprox_mL = 2000;
                             }
                             else
                             {
@@ -86,6 +86,7 @@ function fillProcedureInternal()
                             newTankParams.new = newLiquidCheckbox.checked;
                             newTankParams.id = id;
                             socket.emit("refillContainer", newTankParams);
+                            exitButton.click();
                         }   
 
                     };
@@ -105,6 +106,7 @@ function fillProcedure()
     {
         /* Once the new drink has been sent to the server, the promise will resolve */
         loadSingles();
+        loadCombinations();
     }, function(err) 
     {
     console.log(err); // Error: "It broke"
