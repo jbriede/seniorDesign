@@ -103,6 +103,8 @@ var loadCombinations = function()
 								loadCombinations();
 								$("#smallPopupContainer").load('HTML/waiting.html', function()
 								{
+									var warningText = document.getElementById("warningText");
+									warningText.innerHTML = "Drink is Dispensing. Please Wait...";
 									setTimeout(function(){ 
 										dispenseExitButton.click();
 										smallPopupContainer.style.display = "none";

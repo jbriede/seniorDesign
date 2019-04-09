@@ -5,7 +5,8 @@ class Database {
   constructor() 
   {
   	this.tanks = [];
-  	this.combos = [];
+    this.combos = [];
+    this.socket = null;
 
   	// Read drinks from files into object
   	let rawdata = fs.readFileSync('drinks.json');  
@@ -20,6 +21,12 @@ class Database {
     } 
  	
   }
+
+  add_socket(_socket)
+  {
+    this.socket = _socket;
+  }
+
   add_combo(combination)
   {
     combination.id = this.cur_num_combinations;
@@ -95,6 +102,8 @@ class Database {
     }
     this.updateFile();
   }
+  // Need to emit this when tanks are low
+  //
 
   update_tank_level(i, ml_dispensed)
   {
@@ -102,6 +111,10 @@ class Database {
     if (this.tanks[i].ml < 0)
     {
       this.tanks[i].available = false;
+    }
+    else if (this.tanks[i].ml < 150)
+    {
+      this.socket.emit("lowVolumeWarning", this.tanks[i]);
     }
 
     this.updateFile();
