@@ -44,7 +44,17 @@
 
   </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+<!-- normal script imports etc  -->
+<script src="../javascript/jquery-3.3.1.min.js"></script>    
+  
+
+<!-- Insert this line after script imports -->
+<script>if (window.module) module = window.module;</script>
+
+<!--<script src="../javascript/jquery-3.3.1.min.js"></script>-->
 <script src="/socket.io/socket.io.js"></script>
 <script src="../javascript/issue.js"></script>
 <script src="../javascript/combinations.js"></script>

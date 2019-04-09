@@ -2,6 +2,8 @@
  * Main GUI javascript to organize other javascript files
  */
 
+
+
 var socket = io();
 
 var popupContainer = document.getElementById("popupContainer");
