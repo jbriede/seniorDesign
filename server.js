@@ -11,31 +11,16 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fs = require('fs');
 
-var gpio = require('rpi-gpio');
-var gpiop = gpio.promise;
-
 //var Database = require('database.js');
 // var sensor = require('node-dht-sensor');
-
-// var pin = 22;
-
-// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-// {
-//     console.log("on", pin);
-//     gpio.write(pin, false)
-// }).catch((err) => {
-//     console.log("CANT USE PIN", pin)
-//     console.log(err)
-// })
-// console.log("hi");
 
 
 
 const Database = require('./database.js');
-const TemperatureRegulator = require('./temperatureRegulator.js');
+//const TemperatureRegulator = require('./temperatureRegulator.js');
 
 var db = new Database();
-var temp = new TemperatureRegulator();
+//var temp = new TemperatureRegulator();
 
 
 const Dispenser = require('./dispenser.js');
@@ -109,4 +94,5 @@ http.listen(3000, function(){
   console.log('listening on *:3000 hello');
 
 });
+
 
