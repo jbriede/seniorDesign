@@ -164,6 +164,7 @@ function addDrinkProcedure()
                     document.getElementById("drinkNameText").value = "";
                     resolve("Stuff worked!");
                 }
+                
 
                 /* Drink complete and submit button */
                 var completeButton = document.getElementById("drinkAdditionCompleteButton");
@@ -182,6 +183,18 @@ function addDrinkProcedure()
                         exitButton.click();
                     }
                 }
+                var text_enter = document.getElementById("drinkNameText");
+                text_enter.addEventListener("keydown", function (e) {
+                    if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+                        completeButton.click();
+                    }
+                });
+                
+                text_enter.onclick = function()
+                {
+                    socket.emit("text_enter")
+                }
+
             })
 			
 		}, function(err)

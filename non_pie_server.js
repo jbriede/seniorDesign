@@ -5,6 +5,8 @@ This program needs to:
 - Detect low water level?
 - regulate temperature
 */
+
+//var child;
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -37,6 +39,9 @@ io.on('connection', function(socket){
 	socket.on('newCombination', function(combinationObject)
 	{
 		console.log("adding : " + combinationObject);
+		//child.kill();
+		//console.log('\nKilling Florence');
+		db.kill_keyboard();
 		db.add_combo(combinationObject);
 	});
 
@@ -79,8 +84,18 @@ io.on('connection', function(socket){
 	socket.on('dispenseCombination', function(dispenseObj){ 
 		var drink_id = dispenseObj.id; 	// drinkId 
 		dispense.dispense_combo(drink_id, dispenseObj.ml);
+		//this.child.kill();
 
 	});
+	socket.on('text_enter', function()
+	{
+		db.start_keyboard();
+		// child = exec('florence');
+		// console.log('\nStarting florence');
+		//child.kill();
+		//console.log('\nExiting Florence');
+	});
+
 });
 
 http.listen(3000, function(){

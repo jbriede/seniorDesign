@@ -1,5 +1,6 @@
 const fs = require('fs');
-
+var child;
+var exec = require('child_process').exec;
 
 class Database {
   constructor() 
@@ -126,6 +127,18 @@ class Database {
   	fs.writeFileSync('drinks.json', data);
   	data = JSON.stringify(this.tanks);
   	fs.writeFileSync('tanks.json', data);
+  }
+
+  start_keyboard()
+  {
+		this.child = exec('florence');
+		console.log('\nStarting florence');
+  }
+
+  kill_keyboard()
+  {
+    this.child.kill();
+    console.log('\nKilling Florence');
   }
 
   find_drink(drink_id)
