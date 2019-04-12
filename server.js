@@ -41,7 +41,6 @@ io.on('connection', function(socket){
 		console.log("adding : " + combinationObject);
 		//child.kill();
 		//console.log('\nKilling Florence');
-		db.kill_keyboard();
 		db.add_combo(combinationObject);
 	});
 
@@ -94,6 +93,10 @@ io.on('connection', function(socket){
 		// console.log('\nStarting florence');
 		//child.kill();
 		//console.log('\nExiting Florence');
+	});
+	socket.on('text_exit', function()
+	{
+		db.kill_keyboard();
 	});
 
 });

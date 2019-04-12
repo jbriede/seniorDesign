@@ -1,6 +1,8 @@
 const fs = require('fs');
-var child;
-var exec = require('child_process').exec;
+//var exec = require('child_process').exec;
+
+const { spawn } = require('child_process');
+
 
 class Database {
   constructor() 
@@ -8,6 +10,7 @@ class Database {
   	this.tanks = [];
     this.combos = [];
     this.socket = null;
+    this.child = null;
 
   	// Read drinks from files into object
   	let rawdata = fs.readFileSync('drinks.json');  
@@ -103,8 +106,6 @@ class Database {
     }
     this.updateFile();
   }
-  // Need to emit this when tanks are low
-  //
 
   update_tank_level(i, ml_dispensed)
   {
@@ -131,13 +132,17 @@ class Database {
 
   start_keyboard()
   {
-		this.child = exec('florence');
+		//this.child = exec('florence -u florence.conf');
+		this.child = spawn('florence', ['-u florence.conf']);
 		console.log('\nStarting florence');
+		
   }
 
   kill_keyboard()
   {
-    this.child.kill();
+	  console.log(this.child.kill());
+    //this.child.kill('SIGKILL');
+    this.child.kill('SIGHUP');
     console.log('\nKilling Florence');
   }
 

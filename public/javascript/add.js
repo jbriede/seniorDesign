@@ -162,6 +162,7 @@ function addDrinkProcedure()
                     ingredientContainer.innerHTML = "";
                     popupContainer.style.display = "none";
                     document.getElementById("drinkNameText").value = "";
+                    socket.emit("text_exit");
                     resolve("Stuff worked!");
                 }
                 
@@ -192,7 +193,7 @@ function addDrinkProcedure()
                 
                 text_enter.onclick = function()
                 {
-                    socket.emit("text_enter")
+                    socket.emit("text_enter");
                 }
 
             })
