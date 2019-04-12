@@ -1,12 +1,13 @@
 body
 {
-	width: 800px;
-	height: 480px;
+	width: 780px;
+	height: 455px;
 	margin: 0px;
+	overflow: hidden;
 }
 #top
 {
-	width: 800px;
+	width: 780px;
 	height:380px;
 }
 #buttonBlocker

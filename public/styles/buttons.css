@@ -25,7 +25,7 @@
 	width: 180px;
 	margin-left:auto;
     margin-right:auto;
-    height: 58px;
+    height: 55px;
     margin-top: 10px;
     margin-bottom: 16px;
     border-radius: 10px;
@@ -33,7 +33,7 @@
 
 #combinations > div {
 	background-color: #f1f1f1;
-	width: 177px;
+	width: 170px;
 	margin: 10px;
 	text-align: center;
 	height: 73px;
@@ -68,7 +68,7 @@
 }
 .singlesButton
 {
-    width: 120px;
+    width: 110px;
     margin-left: 11px;
     height: 77px;
     margin-top: 13px;
