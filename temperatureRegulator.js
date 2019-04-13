@@ -6,6 +6,7 @@ const fs = require('fs');
 class TemperatureRegulator {
   constructor() {
     this.current_temp = 50;
+    this.peltier_disable = false;
 
     let rawdata = fs.readFileSync('temp.json');  //read temp file
     this.desired_temp = JSON.parse(rawdata);    // read last teimp from file
@@ -16,9 +17,31 @@ class TemperatureRegulator {
     {
       this.regulate_temp();
     },
-    2000)
+    30000)
   }
 
+  disable_peltier()
+  {
+    this.peltier_disable = true; //set flag so peltier doesn't get enabled
+    if (this.peltier_status == true) //disable peltier if it's enabled
+    {
+      this.turnoff2(22); //update with pin
+      this.turnoff2(12); //update with pin
+      console.log("\nDisable Peltier")
+    }
+  }
+
+  enable_peltier()
+  {
+    this.peltier_disable = false;
+
+    if (this.peltier_status == true) //enable peltier if it's enabled
+    {
+      this.turnon(22);
+      this.turnon(12);
+      console.log("\nEnable Peltier");
+    }
+  }
   get_current_temp()
   {
     // temp = sensor.read(11 , 26, function(err, temperature, humidity) {
@@ -49,7 +72,7 @@ class TemperatureRegulator {
     this.get_current_temp();
     if (this.desired_temp < this.current_temp)
     {
-      if (this.peltier_status == false) //is peltier disabled? Enable. Else, do nothing
+      if (this.peltier_status == false && this.peltier_disable == false) //is peltier disabled? Endisable_peltdisable_peltierierable. Else, do nothing
       {
         console.log("\nenable peltier") //enable peltier
         this.peltier_status = true;

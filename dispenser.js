@@ -1,5 +1,7 @@
 //  var gpio = require('rpi-gpio');
 //  var gpiop = gpio.promise;
+const TemperatureRegulator = require('./temperatureRegulator.js');
+var temp = new TemperatureRegulator();
 
 class Dispenser {
     constructor(db) 
@@ -73,6 +75,7 @@ class Dispenser {
         // {
         // 	console.log("off", this.pin);
         // 	return gpio.write(this.pin, false)
+        temp.enable_peltier(); //Enable Peltier when pumps are disabled
         // }).catch((err) => {
         // 	console.log("CANT USE PIN", this.pin)
         // 	console.log(err)
@@ -83,7 +86,8 @@ class Dispenser {
     {
     	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
     	// {
-    	// 	return gpio.write(pin, true)
+        // 	return gpio.write(pin, true)
+        temp.disable_peltier(); //disable peltier when pumps are enabled
     	// }).catch((err) => {
     	// 	console.log(err)
     	// })
@@ -95,7 +99,8 @@ class Dispenser {
 	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
 	// {
 	// 	console.log("off", pin);
-	// 	return gpio.write(pin, false)
+    // 	return gpio.write(pin, false)
+    temp.enable_peltier(); //disable peltier when pumps are enabled
 	// }).catch((err) => {
 	// 	console.log("CANT USE PIN", pin)
 	// 	console.log(err)
