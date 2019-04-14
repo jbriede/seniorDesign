@@ -16,7 +16,7 @@ var getTanks = function()
 
 /* Client copy of tanks list */
 var tanksG = [];
-
+var is_on = false;
 var tanksDiv = document.getElementById("singles");
 var loadSingles = function()
 {
@@ -39,17 +39,23 @@ var loadSingles = function()
 			if (tanks[tanksIndex].available)
 			{
 				var dispenseButton = document.getElementById("dispenseButton-" + tanksIndex);
-				dispenseButton.onmousedown = function()
+				
+				dispenseButton.onclick = function()
 				{
-					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
-					socket.emit("dispenseSingleDrink", id);
-				}
-				dispenseButton.onmouseup = function()
-				{
-					var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
-					socket.emit("stopDispense", id);
-					loadCombinations();
-					loadSingles();
+					if (is_on)
+					{
+						var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+						socket.emit("stopDispense", id);
+						loadCombinations();
+						loadSingles();
+						is_on = false;
+					}
+					else
+					{
+						var id = parseInt(this.id.substr(this.id.lastIndexOf('-')+1, this.id.length));
+						socket.emit("dispenseSingleDrink", id);
+						is_on = true;
+					}
 				}
 			}
         }
