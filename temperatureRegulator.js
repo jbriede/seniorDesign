@@ -1,7 +1,7 @@
 const fs = require('fs');
-// var gpio = require('rpi-gpio');
-// var gpiop = gpio.promise;
-// var sensor = require('node-dht-sensor');
+var gpio = require('rpi-gpio');
+var gpiop = gpio.promise;
+var sensor = require('node-dht-sensor');
 
 class TemperatureRegulator {
   constructor() {
@@ -43,13 +43,15 @@ class TemperatureRegulator {
     }
   }
   get_current_temp()
-  {
-    // temp = sensor.read(11 , 26, function(err, temperature, humidity) {
-    //   if (!err) {
-    //       console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
-    //   }
-    // });
-    return this.current_temp;
+  {let blah = this;
+    var temp = sensor.read(11 , 26, function(err, temperature, humidity) {
+    if (!err) {
+           console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
+           blah.current_temp = temperature.toFixed(1)*(9/5) + 32;
+
+       }
+    });
+        return this.current_temp;
   }
 
   get_desired_temp(desired_temp)
@@ -96,24 +98,24 @@ class TemperatureRegulator {
 
   turnoff2(pin)
   {
-    // gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-    // {
-    // 	console.log("off", pin);
-    // 	return gpio.write(pin, false)
-    // }).catch((err) => {
-    // 	console.log("CANT USE PIN", pin)
-    // 	console.log(err)
-    // })
+    gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+     {
+     	console.log("off", pin);
+     	return gpio.write(pin, false)
+     }).catch((err) => {
+     	console.log("CANT USE PIN", pin)
+     	console.log(err)
+     })
   }
 
   turnon(pin)
 {
-	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	return gpio.write(pin, true)
-	// }).catch((err) => {
-	// 	console.log(err)
-	// })
+	 gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	 {
+	 	return gpio.write(pin, true)
+	 }).catch((err) => {
+	 	console.log(err)
+	 })
 }
 
 

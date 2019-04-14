@@ -1,5 +1,5 @@
-//  var gpio = require('rpi-gpio');
-//  var gpiop = gpio.promise;
+var gpio = require('rpi-gpio');
+var gpiop = gpio.promise;
 const TemperatureRegulator = require('./temperatureRegulator.js');
 var temp = new TemperatureRegulator();
 
@@ -8,6 +8,12 @@ class Dispenser {
     {
        this.db = db;
        this.ml_per_second = 20;
+       this.turnoff2(3);
+       this.turnoff2(5);
+       this.turnoff2(7);
+       this.turnoff2(11);
+       this.turnoff2(13);
+       this.turnoff2(19);
        
     }
 
@@ -71,40 +77,44 @@ class Dispenser {
 
     turnoff()
     {
-        // gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
-        // {
-        // 	console.log("off", this.pin);
-        // 	return gpio.write(this.pin, false)
+        gpiop.setup(this.pin, gpio.DIR_OUT).then(() =>
+        {
+        console.log("off", this.pin);
+        
+        var r = gpio.write(this.pin, false)
         temp.enable_peltier(); //Enable Peltier when pumps are disabled
-        // }).catch((err) => {
-        // 	console.log("CANT USE PIN", this.pin)
-        // 	console.log(err)
-        // })
+        return r;
+        
+        }).catch((err) => {
+			console.log("CANT USE PIN", this.pin)
+         	console.log(err)
+        })
     }
 
     turnon(pin)
     {
-    	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-    	// {
-        // 	return gpio.write(pin, true)
-        temp.disable_peltier(); //disable peltier when pumps are enabled
-    	// }).catch((err) => {
-    	// 	console.log(err)
-    	// })
+		temp.disable_peltier(); 
+    	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+    	{
+        	return gpio.write(pin, true)
+    	}).catch((err) => {
+    	console.log(err)
+    	})
     }
 
 
     turnoff2(pin)
 {
-	// gpiop.setup(pin, gpio.DIR_OUT).then(() =>
-	// {
-	// 	console.log("off", pin);
-    // 	return gpio.write(pin, false)
+	gpiop.setup(pin, gpio.DIR_OUT).then(() =>
+	{
+	console.log("off", pin);
+    var r =  gpio.write(pin, false)
     temp.enable_peltier(); //disable peltier when pumps are enabled
-	// }).catch((err) => {
-	// 	console.log("CANT USE PIN", pin)
-	// 	console.log(err)
-	// })
+    return r;
+	}).catch((err) => {
+	console.log("CANT USE PIN", pin)
+	console.log(err)
+	})
 }
     
 

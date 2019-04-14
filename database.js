@@ -140,9 +140,12 @@ class Database {
 
   kill_keyboard()
   {
-	  console.log(this.child.kill());
     //this.child.kill('SIGKILL');
-    this.child.kill('SIGHUP');
+    if (this.chld){
+			this.child.kill('SIGHUP');
+			this.child = null;
+	}
+    
     console.log('\nKilling Florence');
   }
 

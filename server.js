@@ -89,10 +89,7 @@ io.on('connection', function(socket){
 	socket.on('text_enter', function()
 	{
 		db.start_keyboard();
-		// child = exec('florence');
-		// console.log('\nStarting florence');
-		//child.kill();
-		//console.log('\nExiting Florence');
+
 	});
 	socket.on('text_exit', function()
 	{
